@@ -1,5 +1,7 @@
-﻿@{
+﻿@using System.Diagnostics
+@{
     ViewData["Title"] = "Home Page";
+    var list = ViewBag.Articles as List<BlogArticleDto>;
 }
 <link href="~/css/Index.css" rel="stylesheet" />
 <div class="row">
@@ -11,28 +13,23 @@
             <span>写想法</span>
         </div>
         <div class="topic-Main">
-            <div class="topicItem">
-                <div class="topicItem-title">
-                    <h4>h2. Bootstrap heading</h4>
+            @{
+                Debug.Assert(list != null, nameof(list) + " != null");
+            }
+            @foreach (var item in list)
+            {
+                <div class="topicItem">
+                    <div class="topicItem-title">
+                        <h4>@item.Label</h4>
+                    </div>
+                    <div class="topicItem-authorInfo">
+                        <h4>@item.CreateBy</h4>
+                    </div>
+                    <div class="topicItem-contentItem">
+                        <h4>@item.Content</h4>
+                    </div>
                 </div>
-                <div class="topicItem-authorInfo">
-                    <h4>h2. Bootstrap heading</h4>
-                </div>
-                <div class="topicItem-contentItem">
-                    <h6>h6. Bootstrap heading</h6>
-                </div>
-            </div>
-            <div class="topicItem">
-                <div class="topicItem-title">
-                    <h4>h2. Bootstrap heading</h4>
-                </div>
-                <div class="topicItem-authorInfo">
-                    <h4>h2. Bootstrap heading</h4>
-                </div>
-                <div class="topicItem-contentItem">
-                    <h6>h6. Bootstrap heading</h6>
-                </div>
-            </div>
+            }
         </div>
     </div>
     <div class="col-md-3">.col-md-3</div>

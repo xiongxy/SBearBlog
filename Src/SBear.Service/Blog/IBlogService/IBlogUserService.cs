@@ -9,5 +9,6 @@ namespace SBear.Service.Blog.IBlogService
     {
         BlogUserDto CheckUser(string userName, string password);
         BlogUserDto GetUser(string userName);
+        BlogUserDto Insert(string userName, string password);
     }
 }

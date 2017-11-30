@@ -12,14 +12,15 @@ namespace SBear.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IBlogUserService _blogUserService;
-        public HomeController(IBlogUserService blogUserService)
+        private readonly IBlogArticleService _blogArticleService;
+        public HomeController(IBlogUserService blogUserService, IBlogArticleService blogArticleService)
         {
+            _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
         }
-
-        public IActionResult Index()
+        public IActionResult Index(int pageNum)
         {
-            var v = _blogUserService.GetUser("admin");
+            ViewBag.Articles = _blogArticleService.GetArticleListPage(10, pageNum);
             return View();
         }
     }

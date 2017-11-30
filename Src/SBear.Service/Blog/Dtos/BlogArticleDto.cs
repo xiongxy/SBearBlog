@@ -9,5 +9,6 @@ namespace SBear.Service.Blog.Dtos
         public String Title { get; set; }
         public String Content { get; set; }
         public String Label { get; set; }
+        public String CreateBy { get; set; }
     }
 }

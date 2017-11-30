@@ -9,7 +9,7 @@ namespace SBear.Repository
 {
     public class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : BaseEntity
     {
-        private DataContext _dataContext;
+        private readonly DataContext _dataContext;
 
         public BaseRepository(DataContext dataContext)
         {
@@ -48,7 +48,9 @@ namespace SBear.Repository
 
         public TEntity Insert(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dataContext.Set<TEntity>().Add(entity);
+            _dataContext.SaveChanges();
+            return entity;
         }
 
         public TEntity InsertOrUpdate(TEntity entity)
@@ -72,8 +74,19 @@ namespace SBear.Repository
                 Expression.PropertyOrField(lambdaParam, "Id"),
                 Expression.Constant(id, typeof(TPrimaryKey))
             );
-
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
+        }
+
+        public int GetTotalCount(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dataContext.Set<TEntity>().Count(predicate);
+        }
+
+        public IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order)
+        {
+            var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
+            rowCount = result.Count();
+            return result.AsQueryable();
         }
     }
 

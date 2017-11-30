@@ -10,10 +10,7 @@ namespace SBear.Service
     {
         public static void Initialize()
         {
-            Mapper.Initialize(config =>
-            {
-                BlogMapperInit.Init(config);
-            });
+            Mapper.Initialize(BlogMapperInit.Init);
 
         }
     }

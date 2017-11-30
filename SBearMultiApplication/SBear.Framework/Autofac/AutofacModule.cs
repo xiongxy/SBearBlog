@@ -15,6 +15,9 @@ namespace SBear.Framework.Autofac
         {
             builder.RegisterType<BlogUserRepository>().As<IBlogUserRepository>();
             builder.RegisterType<BlogUserService>().As<IBlogUserService>();
+
+            builder.RegisterType<BlogArticleRepositroy>().As<IBlogArticleRepositroy>();
+            builder.RegisterType<BlogArticleService>().As<IBlogArticleService>();
         }
     }
 }
