@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\SBear.Service\SBear.Service.csproj" />
+    <ProjectReference Include="..\SBear.Repository\SBear.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

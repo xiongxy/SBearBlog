@@ -1,15 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using SBear.Entity.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SBear.Entities.SBearEntities;
 
-namespace SBear.Entity
+namespace SBear.Entities
 {
-    public class DataContext : DbContext
+    public partial class DataContext : DbContext
     {
-        public DataContext(DbContextOptions options):base(options)
+        public DataContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<SBearUserEntity> SBearUserEntitys { get; set; }
-        public DbSet<SBearArticleEntity> SBearArticleEntitys { get; set; }
+      
     }
 }

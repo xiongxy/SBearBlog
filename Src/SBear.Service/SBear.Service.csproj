@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SBearMultiApplication\SBear.Repository\SBear.Repository.csproj" />
+    <ProjectReference Include="..\SBear.Entity\SBear.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

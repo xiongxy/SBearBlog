@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
   </ItemGroup>
@@ -15,7 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SBearMultiApplication\SBear.Framework\SBear.Framework.csproj" />
-    <ProjectReference Include="..\SBear.Entity\SBear.Entity.csproj" />
+    <ProjectReference Include="..\SBear.Entity\SBear.Entities.csproj" />
+    <ProjectReference Include="..\SBear.Service\SBear.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

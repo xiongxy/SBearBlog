@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Web", "..\Src\SBear.Web\SBear.Web.csproj", "{3878BC15-CD33-479A-A75E-EF7EA5E0CFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Web", "..\Src\SBear.Web\SBear.Web.csproj", "{3878BC15-CD33-479A-A75E-EF7EA5E0CFD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Entity", "..\Src\SBear.Entity\SBear.Entity.csproj", "{D5974179-3DC1-4C64-A3E5-68AEE7F0E238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Entities", "..\Src\SBear.Entity\SBear.Entities.csproj", "{D5974179-3DC1-4C64-A3E5-68AEE7F0E238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Framework", "SBear.Framework\SBear.Framework.csproj", "{E21CF427-3410-44EC-993E-E58C9B8DBD3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Framework", "SBear.Framework\SBear.Framework.csproj", "{E21CF427-3410-44EC-993E-E58C9B8DBD3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Repository", "SBear.Repository\SBear.Repository.csproj", "{8788913C-729E-4346-8D20-85126F83F2EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Service", "..\Src\SBear.Service\SBear.Service.csproj", "{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{E21CF427-3410-44EC-993E-E58C9B8DBD3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E21CF427-3410-44EC-993E-E58C9B8DBD3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E21CF427-3410-44EC-993E-E58C9B8DBD3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8788913C-729E-4346-8D20-85126F83F2EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8788913C-729E-4346-8D20-85126F83F2EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8788913C-729E-4346-8D20-85126F83F2EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8788913C-729E-4346-8D20-85126F83F2EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

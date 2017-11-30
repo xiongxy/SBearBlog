@@ -1,0 +1,27 @@
+﻿.card {
+    background-color: white;
+    padding: 16px 20px;
+    -webkit-box-shadow: 0 1px 3px #000000;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    margin-top: 20px;
+}
+
+.topic-Main {
+}
+
+.topicItem {
+    background-color: white;
+    padding: 16px 20px;
+    -webkit-box-shadow: 0 1px 3px #000000;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    margin-top: 20px;
+}
+
+.topicItem-title {
+}
+
+.topicItem-authorInfo {
+}
+
+.topicItem-contentItem {
+}

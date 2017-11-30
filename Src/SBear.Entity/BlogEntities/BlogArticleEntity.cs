@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SBear.Entity.Entities
+namespace SBear.Entities.BlogEntities
 {
-    public class SBearArticleEntity : BaseEntity
+    public class BlogArticleEntity : BaseEntity
     {
         public String Title { get; set; }
         public String Content { get; set; }
