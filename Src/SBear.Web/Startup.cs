@@ -58,7 +58,9 @@ namespace SBear.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            
             app.UseRequestMsgMiddleware();
+            app.UseSBearHttpContextMiddleware();
             app.UseStaticFiles();
             InitializeDataBase(app.ApplicationServices);
             app.UseMvc(routes =>

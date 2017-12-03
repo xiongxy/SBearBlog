@@ -10,5 +10,6 @@ namespace SBear.Service.Blog.Dtos
         public String Content { get; set; }
         public String Label { get; set; }
         public String CreateBy { get; set; }
+        public DateTime CreateDate => DateTime.Now;
     }
 }

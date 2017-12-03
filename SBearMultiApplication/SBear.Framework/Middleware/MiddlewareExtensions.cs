@@ -12,5 +12,9 @@ namespace SBear.Framework.Middleware
         {
             return builder.UseMiddleware<RequestMsgMiddleware>(LogManager.GetLogger("NETCoreRepository", ""));
         }
+        public static IApplicationBuilder UseSBearHttpContextMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<SBearHttpContextMiddleware>();
+        }
     }
 }

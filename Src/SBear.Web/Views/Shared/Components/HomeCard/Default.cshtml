@@ -1,0 +1,6 @@
+﻿@if (UserRuntimeContext.CheckUserLogin())
+{
+    <div class="card">
+        @Html.ActionLink("写文章", "WriteArticle", "Home")
+    </div>
+}

@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.ViewModels.AccountViewModel;
-
+using SBear.Framework;
+using SBear.Framework.Account;
+using Newtonsoft.Json;
 
 namespace SBear.Web.Controllers
 {
@@ -31,7 +33,13 @@ namespace SBear.Web.Controllers
             var v = _blogUserService.CheckUser(vm.UserName, vm.Password);
             if (v != null)
             {
-                HttpContext.Session.SetString("LoginMessage", $"{v.Nickname}|{v.UserName}|{vm.Password}");
+                UserRuntimeInfo userRuntimeInfo = new UserRuntimeInfo()
+                {
+                    NickName = v.Nickname,
+                    UserName = v.UserName
+                };
+                UserRuntimeContext.CurrentUser = userRuntimeInfo;
+                return Redirect("../Home/Index");
             }
             return View();
         }
@@ -48,6 +56,10 @@ namespace SBear.Web.Controllers
                 return View(vm);
             }
             var v = _blogUserService.Insert(vm.UserName, vm.Password);
+            if (v != null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
     }

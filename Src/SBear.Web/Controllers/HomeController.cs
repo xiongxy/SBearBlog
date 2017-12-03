@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.ViewModels;
+using SBear.Web.ViewModels.HomeViewModel;
+using SBear.Entities.BlogEntities;
 
 namespace SBear.Web.Controllers
 {
@@ -21,6 +23,17 @@ namespace SBear.Web.Controllers
         public IActionResult Index(int pageNum)
         {
             ViewBag.Articles = _blogArticleService.GetArticleListPage(10, pageNum);
+            return View();
+
+        }
+        public IActionResult WriteArticle()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult WriteArticle(ArticleViewModel vm)
+        {
+            _blogArticleService.Insert(vm);
             return View();
         }
     }

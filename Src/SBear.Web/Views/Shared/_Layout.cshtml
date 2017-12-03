@@ -8,18 +8,19 @@
     <link href="~/lib/jquery/dist/jquery.js" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+    @RenderSection("Css", required: false)
 </head>
 <body>
     <!-- Fixed navbar -->
     <nav class="header navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                     <img alt="Blog" src="~/Image/duolaAmeng.jpg" style="width: 20px; height: 20px;" />
                 </a>
-                <a class="navbar-brand" href="#">Blog</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Blog</a>
             </div>
-            @await Html.PartialAsync("_LoginPartial")
+            @await Component.InvokeAsync("LoginStatusBar")
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="请输入搜索内容...">
@@ -37,5 +38,7 @@
             <p><a href="https://github.com/xiongxy/SBearBlog" target="_blank">SBear</a>&copy; 2017 - SBear</p>
         </div>
     </footer>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @RenderSection("Script", required: false)
 </body>
 </html>

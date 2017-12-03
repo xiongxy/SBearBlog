@@ -15,9 +15,10 @@ namespace SBear.Service.Blog.BlogService
         {
             _repository = repository;
         }
-        public BlogArticleDto Insert(BlogArticleEntity entity)
+        public BlogArticleDto Insert(BlogArticleDto entity)
         {
-            return Mapper.Map<BlogArticleDto>(_repository.Insert(entity));
+            var v = Mapper.Map<BlogArticleEntity>(entity);
+            return Mapper.Map<BlogArticleDto>(_repository.Insert(v));
         }
 
         public BlogArticleDto GetArticle(Guid id)

@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Entities", "..\Src\SB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Framework", "SBear.Framework\SBear.Framework.csproj", "{E21CF427-3410-44EC-993E-E58C9B8DBD3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Repository", "SBear.Repository\SBear.Repository.csproj", "{8788913C-729E-4346-8D20-85126F83F2EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Repository", "SBear.Repository\SBear.Repository.csproj", "{8788913C-729E-4346-8D20-85126F83F2EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBear.Service", "..\Src\SBear.Service\SBear.Service.csproj", "{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBear.Service", "..\Src\SBear.Service\SBear.Service.csproj", "{FA2AAC0B-A1E1-40DA-BF8C-74F031606F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

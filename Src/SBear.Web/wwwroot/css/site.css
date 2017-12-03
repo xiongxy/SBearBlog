@@ -2,7 +2,11 @@
     padding-top: 50px;
     background-color: #f3f3f3;
 }
+
 .header {
     background-color: white;
 }
 
+.row {
+    padding-top: 30px;
+}

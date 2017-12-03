@@ -1,0 +1,14 @@
+﻿@if (UserRuntimeContext.CheckUserLogin())
+{<ul class="nav navbar-nav navbar-right">
+        <li><a asp-controller="Account" asp-action="Login">登录1</a></li>
+        <li><a asp-controller="Account" asp-action="Register">注册</a></li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-controller="Account" asp-action="Login">登录</a></li>
+        <li><a asp-controller="Account" asp-action="Register">注册</a></li>
+    </ul>
+
+}
