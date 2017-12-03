@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SBear.Service.SBear.ISBearService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,15 @@ namespace SBear.Web.ViewComponents.Home
 {
     public class HomeSideBarViewComponent : ViewComponent
     {
+        private ISBearVisitorLogService _iSBearVisitorLogService;
+        public HomeSideBarViewComponent(ISBearVisitorLogService iSBearVisitorLogService)
+        {
+            _iSBearVisitorLogService = iSBearVisitorLogService;
+        }
         public IViewComponentResult Invoke()
         {
-            return View();
+            var v = _iSBearVisitorLogService.GetTotalVisitorCount();
+            return View(v);
         }
     }
 }

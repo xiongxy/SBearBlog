@@ -10,5 +10,6 @@ namespace SBear.Entities
     {
         public DbSet<SBearUserEntity> SBearUserEntities { get; set; }
         public DbSet<SBearArticleEntity> SBearArticleEntities { get; set; }
+        public DbSet<SBearVisitorLogEntity> SBearVisitorLogEntities { get; set; }
     }
 }

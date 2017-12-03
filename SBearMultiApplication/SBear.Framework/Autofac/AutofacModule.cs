@@ -6,6 +6,10 @@ using SBear.Repository.Blog.BlogRepository;
 using SBear.Repository.Blog.IBlogRepository;
 using SBear.Service.Blog.BlogService;
 using SBear.Service.Blog.IBlogService;
+using SBear.Repository.SBear.ISBearRepository;
+using SBear.Repository.SBear.SBearRepository;
+using SBear.Service.SBear.ISBearService;
+using SBear.Service.SBear.SBearService;
 
 namespace SBear.Framework.Autofac
 {
@@ -18,6 +22,9 @@ namespace SBear.Framework.Autofac
 
             builder.RegisterType<BlogArticleRepositroy>().As<IBlogArticleRepositroy>();
             builder.RegisterType<BlogArticleService>().As<IBlogArticleService>();
+
+            builder.RegisterType<SBearVisitorLogService>().As<ISBearVisitorLogService>();
+            builder.RegisterType<SBearVisitorLogRepository>().As<ISBearVisitorLogRepository>();
         }
     }
 }

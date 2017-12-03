@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using SBear.Service.Blog;
+using SBear.Service.SBear;
 
 namespace SBear.Service
 {
@@ -10,7 +11,11 @@ namespace SBear.Service
     {
         public static void Initialize()
         {
-            Mapper.Initialize(BlogMapperInit.Init);
+            Mapper.Initialize(config =>
+            {
+                BlogMapperInit.Init(config);
+                SBearMapperInit.Init(config);
+            });
 
         }
     }
