@@ -21,7 +21,7 @@
                         <h4>@item.CreateBy</h4>
                     </div>
                     <div class="topicItem-contentItem">
-                        <h4>@item.Content</h4>
+                        @Html.Raw(item.HTMLContent)
                     </div>
                     <div class="topicItem-action">
                         <h4>@item.CreateDate</h4>

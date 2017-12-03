@@ -1,7 +1,18 @@
 ﻿@if (UserRuntimeContext.CheckUserLogin())
-{<ul class="nav navbar-nav navbar-right">
-        <li><a asp-controller="Account" asp-action="Login">登录1</a></li>
-        <li><a asp-controller="Account" asp-action="Register">注册</a></li>
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img alt="Blog" src="~/Image/duolaAmeng.jpg" style="width: 20px; height: 20px;" />
+                <span>@UserRuntimeContext.CurrentUser.NickName</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">修改个人信息</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a asp-controller="Account" asp-action="LogOut">登出</a></li>
+            </ul>
+        </li>
     </ul>
 }
 else
@@ -10,5 +21,4 @@ else
         <li><a asp-controller="Account" asp-action="Login">登录</a></li>
         <li><a asp-controller="Account" asp-action="Register">注册</a></li>
     </ul>
-
 }

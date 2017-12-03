@@ -62,5 +62,11 @@ namespace SBear.Web.Controllers
             }
             return View();
         }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("../Home/Index");
+        }
     }
 }
