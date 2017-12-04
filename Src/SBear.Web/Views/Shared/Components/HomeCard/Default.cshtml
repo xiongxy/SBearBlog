@@ -1,6 +1,22 @@
-﻿@if (UserRuntimeContext.CheckUserLogin())
+﻿@model CardViewModel
+@switch (Model.aciotnType)
 {
-    <div class="card">
-        @Html.ActionLink("写文章", "Index", "WriteArticle")
-    </div>
+    case SBear.Web.ViewComponents.Home.AciotnType.Home:
+        if (UserRuntimeContext.CheckUserLogin())
+        {
+            <div class="card">
+                @Html.ActionLink("写文章", "Index", "WriteArticle")
+            </div>
+        }
+        break;
+    case SBear.Web.ViewComponents.Home.AciotnType.Edit:
+        if (UserRuntimeContext.CheckUserLogin())
+        {
+            <div class="card">
+                @Html.ActionLink("修改", Model.ArticleIdentityId.ToString(), "WriteArticle")
+            </div>
+        }
+        break;
+    default:
+        break;
 }

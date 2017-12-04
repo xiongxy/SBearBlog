@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SBear.Web.ViewComponents.Home;
+@{
     ViewData["Title"] = "Home Page";
     var article = ViewBag.Article;
 }
@@ -7,12 +8,12 @@
 }
 <div class="row">
     <div class="col-md-12">
+        @await Component.InvokeAsync("HomeCard", new CardViewModel { aciotnType = AciotnType.Edit, ArticleIdentityId = article.IdentityId })
         <div id="test-editormd-view2">
             <textarea id="append-test" style="display:none;">@article.MarkDownContent.ToString()</textarea>
         </div>
     </div>
 </div>
-
 @section Script{
     <script src="~/lib/editor.md/lib/marked.min.js"></script>
     <script src="~/lib/editor.md/lib/prettify.min.js"></script>

@@ -15,11 +15,19 @@ namespace SBear.Web.Controllers
             _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
         }
-        [Route("WriteArticle/{id?}")]
+        [HttpGet("WriteArticle/{id?}")]
         public IActionResult Index(long id)
         {
-            var article = _blogArticleService.GetArticle(id) ;
-            return View(article as ArticleViewModel);
+            var article = _blogArticleService.GetArticle(id);
+            ArticleViewModel articleViewModel = new ArticleViewModel
+            {
+                Title = article.Title,
+                Label = article.Label,
+                IdentityId = article.IdentityId,
+                HtmlContent = article.HtmlContent,
+                MarkDownContent = article.MarkDownContent
+            };
+            return View(articleViewModel);
         }
         [HttpPost]
         public IActionResult WriteArticle(ArticleViewModel vm)
