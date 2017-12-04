@@ -10,6 +10,7 @@ namespace SBear.Service.Blog.IBlogService
     {
         BlogArticleDto Insert(BlogArticleDto entity);
         BlogArticleDto GetArticle(Guid id);
+        BlogArticleDto GetArticle(long id);
         List<BlogArticleDto> GetArticleListPage(int pageSize, int pageNum);
         int GetArticleTotalCount(string typeId);
     }

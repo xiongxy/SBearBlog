@@ -15,6 +15,7 @@ namespace SBear.Entities
     /// </summary>
     public abstract class BaseEntity : BaseEntity<Guid>
     {
+        public long IdentityId { get; set; }
         public string CreateBy { get; set; }
         public DateTime? CreateDate { get; set; }
         public string UpdateBy { get; set; }

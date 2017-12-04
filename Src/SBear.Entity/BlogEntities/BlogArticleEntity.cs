@@ -6,7 +6,7 @@ namespace SBear.Entities.BlogEntities
     {
         public String Title { get; set; }
         public String MarkDownContent { get; set; }
-        public String HTMLContent { get; set; }
+        public String HtmlContent { get; set; }
         public String Label { get; set; }
     }
 }

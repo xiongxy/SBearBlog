@@ -38,7 +38,7 @@ namespace SBear.Repository
 
         public IEnumerable<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dataContext.Set<TEntity>().Where(predicate).ToList();
         }
 
         public IEnumerable<TEntity> GetListAll()

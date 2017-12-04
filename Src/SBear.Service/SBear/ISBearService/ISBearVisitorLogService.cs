@@ -9,5 +9,6 @@ namespace SBear.Service.SBear.ISBearService
     {
         SBearVisitorLogDto Insert(string IP);
         int GetTotalVisitorCount();
+        IList<SBearVisitorLogDto> GetVisitorLogs();
     }
 }

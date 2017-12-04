@@ -22,6 +22,11 @@ namespace SBear.Service.SBear.SBearService
             return Mapper.Map<int>(_repository.GetTotalCount(t => true));
         }
 
+        public IList<SBearVisitorLogDto> GetVisitorLogs()
+        {
+            return Mapper.Map<List<SBearVisitorLogDto>>(_repository.GetAllList(t => true));
+        }
+
         public SBearVisitorLogDto Insert(string ip)
         {
             var sBearVisitorLog = new SBearVisitorLogEntity()

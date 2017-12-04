@@ -15,13 +15,13 @@
             {
                 <div class="topicItem">
                     <div class="topicItem-title">
-                        <h4>@item.Title</h4>
+                        <h4><a asp-controller="Article" asp-action="@item.IdentityId">@item.Title</a></h4>
                     </div>
                     <div class="topicItem-authorInfo">
                         <h4>@item.CreateBy</h4>
                     </div>
                     <div class="topicItem-contentItem">
-                        @Html.Raw(item.HTMLContent)
+                        @Html.Raw(item.HtmlContent)
                     </div>
                     <div class="topicItem-action">
                         <h4>@item.CreateDate</h4>

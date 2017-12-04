@@ -24,4 +24,6 @@
 }
 
 .topicItem-contentItem {
+    height: 250px;
+    overflow: hidden;
 }

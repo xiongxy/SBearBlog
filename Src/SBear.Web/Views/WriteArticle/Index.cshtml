@@ -1,0 +1,178 @@
+﻿@model SBear.Web.ViewModels.WirteArticleViewModels.ArticleViewModel
+
+@section Css{
+    <link href="~/lib/editor.md/css/editormd.css" rel="stylesheet" />
+    <style>
+        .block {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid #ddd;
+        }
+
+            .block .wordTags {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .block input {
+                width: 100%;
+                height: 20px;
+                border: none;
+                outline: none;
+            }
+
+                .block input::-webkit-input-placeholder {
+                    color: #bfbfbf;
+                }
+
+                .block input:-ms-input-placeholder {
+                    color: #bfbfbf;
+                }
+
+                .block input:-moz-placeholder {
+                    color: #bfbfbf;
+                }
+
+                .block input::-moz-placeholder {
+                    color: #bfbfbf;
+                }
+        /* 删除选中标签 */
+        .tag-checked-name {
+            display: inline-block;
+            position: relative;
+            height: 24px;
+            border-radius: 1px;
+            color: #4abee0;
+            font-size: 12px;
+            line-height: 24px;
+            padding: 0 20px 0 8px;
+            background-color: #f7fdff;
+            border: solid 1px #4abee0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 5px;
+        }
+
+            .tag-checked-name:first-of-type {
+                margin-left: 0px;
+            }
+
+            .tag-checked-name em {
+                display: block;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 13px;
+                height: 13px;
+                cursor: pointer;
+                transform: rotate(45deg);
+            }
+
+                .tag-checked-name em:after {
+                    display: block;
+                    position: absolute;
+                    content: '';
+                    top: 6px;
+                    width: 13px;
+                    height: 1px;
+                    background: #4abee0;
+                }
+
+                .tag-checked-name em:before {
+                    display: block;
+                    position: absolute;
+                    content: '';
+                    top: 0px;
+                    left: 5px;
+                    width: 1px;
+                    height: 13px;
+                    background: #4abee0;
+                }
+
+        .wordHiddenInput { }
+
+        .wordInput { }
+    </style>
+}
+<div class="row">
+    <div class="col-md-12">
+        <form id="formArticle" class="form-horizontal" method="post" asp-controller="WriteArticle" asp-action="WriteArticle">
+            <div class="form-group">
+                <label for="inputTitle" class="col-sm-2 control-label">主题</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="Title" id="inputTitle" placeholder="填写主题" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标签</label>
+                <div class="col-sm-10">
+                    <div class="block form-control">
+                        <div class="wordTags"></div>
+                        <input class="wordInput " type="text" name="" placeholder="请输入关键词以空格结尾">
+                        <input class="wordHiddenInput" asp-for="Label" type="hidden">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-10">
+                    <div id="editormd">
+                        <textarea style="display:none;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a id="submitArticle" class="btn btn-default">发布</a>
+                </div>
+            </div>
+            <textarea id="hideHTMLContent" asp-for="HtmlContent" style="display:none;"></textarea>
+            <textarea id="hideMarkDownContent" asp-for="MarkDownContent" style="display:none;"></textarea>
+        </form>
+    </div>
+</div>
+@section Script{
+    <script src="~/lib/editor.md/editormd.js"></script>
+    <script src="~/lib/tagkeyboard/aspect.js"></script>
+    <script src="~/lib/tagkeyboard/keyWord.js"></script>
+    <script type="text/javascript">
+        var Editor;
+        $(function () {
+            Editor = editormd("editormd", {
+                width: "100%",
+                height: 640,
+                path: "/lib/editor.md/lib/",
+                saveHTMLToTextarea: true,
+                syncScrolling: "single",
+                watch: false,
+                emoji : true,
+                taskList : true,
+                tocm            : true,         // Using [TOCM]
+                tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+                flowChart : true,             // 开启流程图支持，默认关闭
+                sequenceDiagram: true,   
+                htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启    
+                toolbarIcons: function () {
+                    return editormd.toolbarModes["simple"];
+                }
+            });
+
+            $("#submitArticle").click(function () {
+                //$("#hideHTMLContent").html(Editor.getHTML());
+                $("#hideMarkDownContent").html(Editor.getMarkdown());
+                //$("#formArticle").submit();
+                alert(Editor.getHTML());
+            });
+            $(".wordInput").keyWord({
+                panel: '.wordTags',
+                value: '.wordHiddenInput',
+                max: 3,
+                tips: '最多只能输入3项'
+            });
+        });
+
+    </script>
+}
+

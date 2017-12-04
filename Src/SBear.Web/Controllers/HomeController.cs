@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
-using SBear.Web.ViewModels;
-using SBear.Web.ViewModels.HomeViewModel;
-using SBear.Entities.BlogEntities;
 
 namespace SBear.Web.Controllers
 {
@@ -22,19 +17,19 @@ namespace SBear.Web.Controllers
         }
         public IActionResult Index(int pageNum)
         {
-            ViewBag.Articles = _blogArticleService.GetArticleListPage(10, pageNum);
-            return View();
+            var vv = _blogArticleService.GetArticleListPage(10, pageNum).Select(x =>
+                new BlogArticleDto
+                {
+                    IdentityId = x.IdentityId,
+                    Title = x.Title,
+                    CreateBy = x.CreateBy,
+                    HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6").Replace("h4", "h6").Replace("h5", "h6"),
+                    Label = x.Label
+                }).ToList();
 
-        }
-        public IActionResult WriteArticle()
-        {
+            ViewBag.Articles = vv;
             return View();
         }
-        [HttpPost]
-        public IActionResult WriteArticle(ArticleViewModel vm)
-        {
-            _blogArticleService.Insert(vm);
-            return View();
-        }
+
     }
 }

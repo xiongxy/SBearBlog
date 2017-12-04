@@ -34,7 +34,7 @@ namespace SBear.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")));
+            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")), ServiceLifetime.Transient, ServiceLifetime.Transient);
             services.AddMvc();
             services.AddSession();
             //add Autofac
@@ -58,7 +58,7 @@ namespace SBear.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            
+
             app.UseRequestMsgMiddleware();
             app.UseSBearHttpContextMiddleware();
             app.UseStaticFiles();
@@ -67,7 +67,7 @@ namespace SBear.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{pageNum?}");
             });
         }
 

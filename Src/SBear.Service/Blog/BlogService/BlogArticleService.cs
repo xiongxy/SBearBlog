@@ -33,5 +33,9 @@ namespace SBear.Service.Blog.BlogService
         {
             return Mapper.Map<int>(_repository.GetTotalCount(null));
         }
+        public BlogArticleDto GetArticle(long id)
+        {
+            return Mapper.Map<BlogArticleDto>(_repository.FirstOrDefault(x => x.IdentityId == id));
+        }
     }
 }
