@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using SBear.Entities;
 
 namespace SBear.Repository
@@ -10,10 +11,11 @@ namespace SBear.Repository
     public class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : BaseEntity
     {
         private readonly DataContext _dataContext;
-
+        private readonly DbSet<TEntity> _dbSet;
         public BaseRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
+            _dbSet = _dataContext.Set<TEntity>();
         }
 
         public bool Delete(TEntity entity)
@@ -24,6 +26,19 @@ namespace SBear.Repository
         public bool Delete(TPrimaryKey id)
         {
             throw new NotImplementedException();
+        }
+        public bool Delete(Expression<Func<TEntity, bool>> predicate)
+        {
+            try
+            {
+                var v = _dataContext.Set<TEntity>().FirstOrDefault(predicate);
+                _dataContext.Remove(v);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
@@ -48,7 +63,7 @@ namespace SBear.Repository
 
         public TEntity Insert(TEntity entity)
         {
-            _dataContext.Set<TEntity>().Add(entity);
+            _dbSet.Add(entity);
             _dataContext.SaveChanges();
             return entity;
         }
@@ -84,7 +99,8 @@ namespace SBear.Repository
 
         public IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order)
         {
-            var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
+            //var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
+            var result = _dataContext.Set<TEntity>().ToList();
             rowCount = result.Count();
             return result.AsQueryable();
         }

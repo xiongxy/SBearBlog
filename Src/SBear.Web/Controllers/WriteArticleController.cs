@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SBear.Framework.Util;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.ViewModels.WirteArticleViewModels;
@@ -10,30 +12,43 @@ namespace SBear.Web.Controllers
     {
         private readonly IBlogUserService _blogUserService;
         private readonly IBlogArticleService _blogArticleService;
-        public WriteArticleController(IBlogUserService blogUserService, IBlogArticleService blogArticleService)
+        private readonly IBlogArticleTypeService _blogArticleTypeService;
+
+        public WriteArticleController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, IBlogArticleTypeService blogArticleTypeService)
         {
             _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
+            _blogArticleTypeService = blogArticleTypeService;
         }
+
         [HttpGet("WriteArticle/{id?}")]
         public IActionResult Index(long id)
         {
             var article = _blogArticleService.GetArticle(id);
+            if (article == null)
+            {
+                article = new Service.Blog.Dtos.BlogArticleDto();
+            }
+            List<SelectListItem> v = new List<SelectListItem>();
+            _blogArticleTypeService.GetAllList().ForEach(x =>
+            {
+                SelectListItem b = new SelectListItem();
+                b.Text = x.TypeName;
+                b.Value = x.IdentityId.ToString();
+                v.Add(b);
+            });
             ArticleViewModel articleViewModel = new ArticleViewModel
             {
-                Title = article.Title,
-                Label = article.Label,
-                IdentityId = article.IdentityId,
-                HtmlContent = article.HtmlContent,
-                MarkDownContent = article.MarkDownContent
+                BlogArticle = article,
+                BlogArticleTypes = v
             };
             return View(articleViewModel);
         }
         [HttpPost]
-        public IActionResult WriteArticle(ArticleViewModel vm)
+        public IActionResult Index(ArticleViewModel vm)
         {
-            vm.IdentityId = Convert.ToInt64(TimestampId.GetInstance().GetID());
-            _blogArticleService.Insert(vm);
+            vm.BlogArticle.IdentityId = Convert.ToInt64(TimestampId.GetInstance().GetID());
+            _blogArticleService.Insert(vm.BlogArticle);
             return RedirectToAction("Index", "Home");
         }
     }

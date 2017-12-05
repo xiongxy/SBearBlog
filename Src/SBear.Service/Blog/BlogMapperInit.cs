@@ -16,6 +16,9 @@ namespace SBear.Service.Blog
 
             config.CreateMap<BlogArticleEntity, BlogArticleDto>();
             config.CreateMap<BlogArticleDto, BlogArticleEntity>();
+
+            config.CreateMap<BlogArticleTypeEntity, BlogArticleTypeDto>();
+            config.CreateMap<BlogArticleTypeDto, BlogArticleTypeEntity>();
         }
     }
 }

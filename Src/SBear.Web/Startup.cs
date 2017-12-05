@@ -34,10 +34,10 @@ namespace SBear.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+            services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")));
+            //services.AddDbContext<DataContext>(options=> options.UseMySql(@"Server=127.0.0.1;database=Blogmy;uid=root;pwd=root"));
             services.AddMvc();
             services.AddSession();
-            //add Autofac
             var containerBuilder = new Autofac.ContainerBuilder();
             containerBuilder.RegisterModule<AutofacModule>();
             containerBuilder.Populate(services);

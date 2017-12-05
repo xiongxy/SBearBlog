@@ -5,9 +5,15 @@ namespace SBear.Entities
 {
     public partial class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext()
         {
         }
-      
+        public DataContext(DbContextOptions options) : base(options)
+        {
+        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlite("Filename=SBear.db");
+        //}
     }
 }

@@ -27,7 +27,7 @@ namespace SBear.Framework.Middleware
             if (!(url.Contains("/css") || url.Contains("/js") || url.Contains("/images") || url.Contains("/lib")))
             {
                 _log.Info($"Url:{url} IP:{context.Connection.RemoteIpAddress} 时间：{DateTime.Now}");
-                //_iSBearVisitorLogService.Insert(context.Connection.RemoteIpAddress.ToString());
+                _iSBearVisitorLogService.Insert(context.Connection.RemoteIpAddress.ToString());
             }
             await _next(context);
         }

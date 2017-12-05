@@ -8,7 +8,7 @@
 }
 <div class="row">
     <div class="col-md-12">
-        @await Component.InvokeAsync("HomeCard", new CardViewModel { aciotnType = AciotnType.Edit, ArticleIdentityId = article.IdentityId })
+        @await Component.InvokeAsync("HomeCard", new CardViewModel { AciotnType = AciotnType.Edit, ArticleIdentityId = article.IdentityId })
         <div id="test-editormd-view2">
             <textarea id="append-test" style="display:none;">@article.MarkDownContent.ToString()</textarea>
         </div>

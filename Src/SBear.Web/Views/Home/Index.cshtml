@@ -7,7 +7,7 @@
 <link href="~/css/Index.css" rel="stylesheet" />
 <div class="row">
     <div class="col-md-9">
-        @await Component.InvokeAsync("HomeCard", new CardViewModel { aciotnType = AciotnType.Home, ArticleIdentityId = 0 })
+        @await Component.InvokeAsync("HomeCard", new CardViewModel { AciotnType = AciotnType.Home, ArticleIdentityId = 0 })
         <div class="topic-Main">
             @{
                 Debug.Assert(list != null, nameof(list) + " != null");
@@ -24,7 +24,7 @@
                     <div class="topicItem-contentItem">
                         @Html.Raw(item.HtmlContent)
                     </div>
-                    <div class="topicItem-action pull-right">
+                    <div class="topicItem-action">
                         <h6>@item.CreateDate 发表</h6>
                     </div>
                 </div>

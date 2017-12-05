@@ -13,5 +13,6 @@ namespace SBear.Service.Blog.Dtos
         public long IdentityId { get; set; }
         public String CreateBy { get; set; }
         public DateTime CreateDate => DateTime.Now;
+        public Guid BlogArticleTypeId { get; set; }
     }
 }

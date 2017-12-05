@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
+using SBear.Entities;
 using SBear.Repository.Blog.BlogRepository;
 using SBear.Repository.Blog.IBlogRepository;
 using SBear.Service.Blog.BlogService;
@@ -25,6 +26,10 @@ namespace SBear.Framework.Autofac
 
             builder.RegisterType<SBearVisitorLogService>().As<ISBearVisitorLogService>();
             builder.RegisterType<SBearVisitorLogRepository>().As<ISBearVisitorLogRepository>();
+
+            builder.RegisterType<BlogArticleTypeService>().As<IBlogArticleTypeService>();
+            builder.RegisterType<BlogArticleTypeRepositroy>().As<IBlogArticleTypeRepositroy>();
+
         }
     }
 }

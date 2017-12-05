@@ -91,27 +91,39 @@
                     background: #4abee0;
                 }
 
-        .wordHiddenInput { }
+        .wordHiddenInput {
+        }
 
-        .wordInput { }
+        .wordInput {
+        }
     </style>
+
+    <link href="~/lib/select2/dist/css/select2.css" rel="stylesheet" />
+    <link href="~/lib/select2-bootstrap-theme/dist/select2-bootstrap.css" rel="stylesheet" />
 }
 <div class="row">
     <div class="col-md-12">
-        <form id="formArticle" class="form-horizontal" method="post" asp-controller="WriteArticle" asp-action="WriteArticle">
+        <form id="formArticle" class="form-horizontal" method="post" asp-controller="WriteArticle">
             <div class="form-group">
                 <label for="inputTitle" class="col-sm-2 control-label">主题</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" asp-for="Title" id="inputTitle" placeholder="填写主题" required>
+                    <input type="text" class="form-control" asp-for="@Model.BlogArticle.Title" id="inputTitle" placeholder="填写主题" required>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分类</label>
+                <div class="col-sm-10">
+                    <select id="dropdown" asp-items="@Model.BlogArticleTypes" class="form-control"></select>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">标签</label>
                 <div class="col-sm-10">
                     <div class="block form-control">
                         <div class="wordTags"></div>
                         <input class="wordInput " type="text" name="" placeholder="请输入关键词以空格结尾">
-                        <input class="wordHiddenInput" asp-for="Label" type="hidden">
+                        <input class="wordHiddenInput" asp-for="@Model.BlogArticle.Label" type="hidden">
                     </div>
                 </div>
             </div>
@@ -119,8 +131,8 @@
                 <label class="col-sm-2 control-label">内容</label>
                 <div class="col-sm-10">
                     <div id="editormd">
-                        <textarea style="display:none;">
-                            @Model.MarkDownContent
+                        <textarea style="display:none;" asp-for="@Model.BlogArticle.MarkDownContent">
+                            
                         </textarea>
                     </div>
                 </div>
@@ -130,18 +142,24 @@
                     <a id="submitArticle" class="btn btn-default">发布</a>
                 </div>
             </div>
-            <textarea id="hideHTMLContent" asp-for="HtmlContent" style="display:none;"></textarea>
-            <textarea id="hideMarkDownContent" asp-for="MarkDownContent" style="display:none;"></textarea>
+            <textarea id="hideHTMLContent" asp-for="@Model.BlogArticle.HtmlContent" style="display:none;"></textarea>
+            <textarea id="hideMarkDownContent" asp-for="@Model.BlogArticle.MarkDownContent" style="display:none;"></textarea>
         </form>
     </div>
 </div>
 @section Script{
-    <script src="~/lib/editor.md/editormd.js"></script>
+    <script src="~/lib/select2/dist/js/i18n/zh-CN.js"></script>
+    <script src="~/lib/select2/dist/js/select2.js"></script>
     <script src="~/lib/tagkeyboard/aspect.js"></script>
     <script src="~/lib/tagkeyboard/keyWord.js"></script>
+    <script src="~/lib/editor.md/editormd.js"></script>
     <script type="text/javascript">
         var Editor;
         $(function () {
+            $("#dropdown").select2({
+                theme: "bootstrap"
+            });
+
             Editor = editormd("editormd", {
                 width: "100%",
                 height: 640,
@@ -173,6 +191,7 @@
                 max: 3,
                 tips: '最多只能输入3项'
             });
+
         });
 
     </script>

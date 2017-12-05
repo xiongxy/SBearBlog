@@ -15,6 +15,7 @@ namespace SBear.Repository
         TEntity Update(TEntity entity);
         TEntity InsertOrUpdate(TEntity entity);
         bool Delete(TEntity entity);
+        bool Delete(Expression<Func<TEntity, bool>> predicate);
         bool Delete(TPrimaryKey id);
         int GetTotalCount(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order);

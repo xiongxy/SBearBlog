@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
+using SBear.Service.SBear.ISBearService;
 
 namespace SBear.Web.Controllers
 {

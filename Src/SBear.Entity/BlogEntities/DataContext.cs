@@ -7,5 +7,6 @@ namespace SBear.Entities
     {
         public DbSet<BlogUserEntity> BlogUserEntities { get; set; }
         public DbSet<BlogArticleEntity> BlogArticleEntities { get; set; }
+        public DbSet<BlogArticleTypeEntity> BlogArticleTypeEntities { get; set; }
     }
 }
