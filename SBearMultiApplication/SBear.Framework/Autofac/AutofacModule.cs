@@ -18,6 +18,7 @@ namespace SBear.Framework.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => new DataContext());
             builder.RegisterType<BlogUserRepository>().As<IBlogUserRepository>();
             builder.RegisterType<BlogUserService>().As<IBlogUserService>();
 

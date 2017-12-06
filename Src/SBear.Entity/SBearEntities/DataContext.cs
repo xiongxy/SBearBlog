@@ -8,8 +8,8 @@ namespace SBear.Entities
 {
     public partial class DataContext
     {
-        public DbSet<SBearUserEntity> SBearUserEntities { get; set; }
-        public DbSet<SBearArticleEntity> SBearArticleEntities { get; set; }
-        public DbSet<SBearVisitorLogEntity> SBearVisitorLogEntities { get; set; }
+        public DbSet<SBearUserEntity> SBearUser { get; set; }
+        public DbSet<SBearArticleEntity> SBearArticle { get; set; }
+        public DbSet<SBearVisitorLogEntity> SBearVisitorLog { get; set; }
     }
 }

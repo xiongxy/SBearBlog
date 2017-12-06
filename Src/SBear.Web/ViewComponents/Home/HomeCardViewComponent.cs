@@ -9,9 +9,10 @@ namespace SBear.Web.ViewComponents.Home
             return View(cardViewModel);
         }
     }
-    public enum AciotnType
+    public enum CardAciotnTypeEnum
     {
-        Edit = 1,
-        Home = 2,
+        AtricleEdit = 1,
+        HomeIndex = 2,
+        HomeSearch = 3
     }
 }

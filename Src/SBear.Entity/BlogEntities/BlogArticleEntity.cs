@@ -7,8 +7,10 @@ namespace SBear.Entities.BlogEntities
         public String Title { get; set; }
         public String MarkDownContent { get; set; }
         public String HtmlContent { get; set; }
+        public String TextConetent { get; set; }
         public String Label { get; set; }
-        public Guid BlogArticleTypeId { get; set; }
-        public BlogArticleTypeEntity BlogArticleTypeEntity { get; set; }
+        public int Views { get; set; }
+        public long BlogArticleTypeId { get; set; }
+        public BlogArticleTypeEntity BlogArticleType { get; set; }
     }
 }

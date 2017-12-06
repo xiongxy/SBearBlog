@@ -10,7 +10,13 @@ namespace SBear.Web.ViewModels.WirteArticleViewModels
 {
     public class ArticleViewModel
     {
+        public ArticleActionEnum ArticleAction { get; set; }
         public BlogArticleDto BlogArticle { get; set; }
         public List<SelectListItem> BlogArticleTypes { get; set; }
+    }
+    public enum ArticleActionEnum
+    {
+        Add = 1,
+        Edit = 2
     }
 }

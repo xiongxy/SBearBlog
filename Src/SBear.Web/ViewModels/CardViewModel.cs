@@ -8,7 +8,8 @@ namespace SBear.Web.ViewModels
 {
     public class CardViewModel
     {
-        public AciotnType AciotnType { get; set; }
+        public CardAciotnTypeEnum CardAciotnType { get; set; }
         public long ArticleIdentityId { get; set; }
+        public int SearchCount { get; set; }
     }
 }

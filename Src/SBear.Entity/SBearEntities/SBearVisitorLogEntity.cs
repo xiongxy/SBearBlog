@@ -6,6 +6,6 @@ namespace SBear.Entities.SBearEntities
 {
     public class SBearVisitorLogEntity : BaseEntity
     {
-        public String IP { get; set; }
+        public String Ip { get; set; }
     }
 }

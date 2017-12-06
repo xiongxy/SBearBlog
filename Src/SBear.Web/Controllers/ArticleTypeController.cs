@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
+using SBear.Web.Filters;
 
 namespace SBear.Web.Controllers
 {
+    [CheckLoginAuthorize]
     public class ArticleTypeController : Controller
     {
         private readonly IBlogArticleTypeService _blogArticleType;

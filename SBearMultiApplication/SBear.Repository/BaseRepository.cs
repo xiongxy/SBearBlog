@@ -11,11 +11,9 @@ namespace SBear.Repository
     public class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : BaseEntity
     {
         private readonly DataContext _dataContext;
-        private readonly DbSet<TEntity> _dbSet;
         public BaseRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
-            _dbSet = _dataContext.Set<TEntity>();
         }
 
         public bool Delete(TEntity entity)
@@ -32,7 +30,7 @@ namespace SBear.Repository
             try
             {
                 var v = _dataContext.Set<TEntity>().FirstOrDefault(predicate);
-                _dataContext.Remove(v);
+                //_dataContext.Remove(v);
             }
             catch (Exception e)
             {
@@ -55,7 +53,10 @@ namespace SBear.Repository
         {
             return _dataContext.Set<TEntity>().Where(predicate).ToList();
         }
-
+        public IEnumerable<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> include)
+        {
+            return _dataContext.Set<TEntity>().Where(predicate).Include(include).ToList();
+        }
         public IEnumerable<TEntity> GetListAll()
         {
             throw new NotImplementedException();
@@ -63,7 +64,7 @@ namespace SBear.Repository
 
         public TEntity Insert(TEntity entity)
         {
-            _dbSet.Add(entity);
+            _dataContext.Set<TEntity>().Add(entity);
             _dataContext.SaveChanges();
             return entity;
         }
@@ -75,7 +76,9 @@ namespace SBear.Repository
 
         public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dataContext.Set<TEntity>().Update(entity);
+            _dataContext.SaveChanges();
+            return entity;
         }
         /// <summary>
         /// 根据主键构建判断表达式
@@ -99,14 +102,13 @@ namespace SBear.Repository
 
         public IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order)
         {
-            //var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
-            var result = _dataContext.Set<TEntity>().ToList();
+            var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
             rowCount = result.Count();
             return result.AsQueryable();
         }
     }
 
-    public class BaseRepository<TEntity> : BaseRepository<TEntity, Guid> where TEntity : BaseEntity
+    public class BaseRepository<TEntity> : BaseRepository<TEntity, long> where TEntity : BaseEntity
     {
         public BaseRepository(DataContext dataContext) : base(dataContext)
         {

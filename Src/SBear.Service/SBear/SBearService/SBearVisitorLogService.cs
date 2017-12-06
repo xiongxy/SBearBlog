@@ -31,7 +31,7 @@ namespace SBear.Service.SBear.SBearService
         {
             var sBearVisitorLog = new SBearVisitorLogEntity()
             {
-                IP = ip
+                Ip = ip
             };
             return Mapper.Map<SBearVisitorLogDto>(_repository.Insert(sBearVisitorLog));
         }

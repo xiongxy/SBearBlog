@@ -1,7 +1,7 @@
 ﻿@model CardViewModel
-@switch (Model.AciotnType)
+@switch (Model.CardAciotnType)
 {
-    case SBear.Web.ViewComponents.Home.AciotnType.Home:
+    case SBear.Web.ViewComponents.Home.CardAciotnTypeEnum.HomeIndex:
         if (UserRuntimeContext.CheckUserLogin())
         {
             <div class="card">
@@ -9,13 +9,18 @@
             </div>
         }
         break;
-    case SBear.Web.ViewComponents.Home.AciotnType.Edit:
+    case SBear.Web.ViewComponents.Home.CardAciotnTypeEnum.AtricleEdit:
         if (UserRuntimeContext.CheckUserLogin())
         {
             <div class="card">
                 @Html.ActionLink("修改", Model.ArticleIdentityId.ToString(), "WriteArticle")
             </div>
         }
+        break;
+    case SBear.Web.ViewComponents.Home.CardAciotnTypeEnum.HomeSearch:
+        <div class="card">
+            <h5>当前搜索到: @Model.SearchCount 条记录</h5>
+        </div>
         break;
     default:
         break;

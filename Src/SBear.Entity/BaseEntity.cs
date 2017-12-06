@@ -11,11 +11,10 @@ namespace SBear.Entities
         public virtual TPrimaryKey Id { get; set; }
     }
     /// <summary>
-    /// 定义默认主键类型为Guid的实体基类
+    /// 定义默认主键类型为long的实体基类
     /// </summary>
-    public abstract class BaseEntity : BaseEntity<Guid>
+    public abstract class BaseEntity : BaseEntity<long>
     {
-        public long IdentityId { get; set; }
         public string CreateBy { get; set; }
         public DateTime? CreateDate { get; set; }
         public string UpdateBy { get; set; }

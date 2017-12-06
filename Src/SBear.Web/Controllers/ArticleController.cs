@@ -19,7 +19,7 @@ namespace SBear.Web.Controllers
         public IActionResult Index(long id)
         {
             var vv = _blogArticleService.GetArticle(id);
-            //StaticWrite.WriteBlogToMd(vv.IdentityId.ToString(), System.Text.Encoding.Default.GetBytes(vv.MarkDownContent));
+            _blogArticleService.AddArticleView(id);
             ViewBag.Article = vv;
             return View();
         }

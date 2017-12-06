@@ -10,5 +10,12 @@ namespace SBear.Web.ViewModels.HomeViewModel
     {
         public int VisitorLogCount { get; set; }
         public List<BlogArticleDto> HotArticle { get; set; }
+        public List<HomeSideBarViewModelArticleType> ArticleType { get; set; }
+    }
+
+    public class HomeSideBarViewModelArticleType
+    {
+        public int Count { get; set; }
+        public BlogArticleTypeDto BlogArticleType { get; set; }
     }
 }

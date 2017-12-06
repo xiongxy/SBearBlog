@@ -113,7 +113,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">分类</label>
                 <div class="col-sm-10">
-                    <select id="dropdown" asp-items="@Model.BlogArticleTypes" class="form-control"></select>
+                    <select id="dropdown" asp-for="BlogArticle.BlogArticleTypeId" asp-items="@Model.BlogArticleTypes" class="form-control"></select>
                 </div>
             </div>
 
@@ -139,11 +139,19 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a id="submitArticle" class="btn btn-default">发布</a>
+                    @if (Model.ArticleAction == SBear.Web.ViewModels.WirteArticleViewModels.ArticleActionEnum.Add)
+                    {
+                        <a id="submitArticle" class="btn btn-default">发布</a>
+                    }
+                    else
+                    {
+                        <a id="submitArticle" class="btn btn-default">修改</a>
+                    }
                 </div>
             </div>
             <textarea id="hideHTMLContent" asp-for="@Model.BlogArticle.HtmlContent" style="display:none;"></textarea>
             <textarea id="hideMarkDownContent" asp-for="@Model.BlogArticle.MarkDownContent" style="display:none;"></textarea>
+            <input type="hidden" asp-for="ArticleAction"/>
         </form>
     </div>
 </div>
@@ -197,3 +205,4 @@
     </script>
 }
 
+s

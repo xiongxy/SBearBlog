@@ -1,22 +1,19 @@
-﻿@using System.Diagnostics
+﻿@model SBear.Web.ViewModels.HomeViewModel.HomeViewModel
+@using System.Diagnostics
 @using SBear.Web.ViewComponents.Home;
 @{
     ViewData["Title"] = "Home Page";
-    var list = ViewBag.Articles as List<BlogArticleDto>;
 }
 <link href="~/css/Index.css" rel="stylesheet" />
 <div class="row">
     <div class="col-md-9">
-        @await Component.InvokeAsync("HomeCard", new CardViewModel { AciotnType = AciotnType.Home, ArticleIdentityId = 0 })
+        @await Component.InvokeAsync("HomeCard", new CardViewModel { CardAciotnType = Model.CardAciotnType, ArticleIdentityId = 0, SearchCount = Model.BlogArticles.Count })
         <div class="topic-Main">
-            @{
-                Debug.Assert(list != null, nameof(list) + " != null");
-            }
-            @foreach (var item in list)
+            @foreach (var item in Model.BlogArticles)
             {
                 <div class="topicItem">
                     <div class="topicItem-title">
-                        <h4><a asp-controller="Article" asp-action="@item.IdentityId">@item.Title</a></h4>
+                        <h4><a asp-controller="Article" asp-action="@item.Id">@item.Title</a></h4>
                     </div>
                     <div class="topicItem-authorInfo">
                         <h4>@item.CreateBy</h4>
@@ -32,6 +29,6 @@
         </div>
     </div>
     <div class="col-md-3">
-        @await Component.InvokeAsync("HomeSideBar")
+        @await Component.InvokeAsync("HomeSideBar", Model.HomeSideBarViewModel)
     </div>
 </div>

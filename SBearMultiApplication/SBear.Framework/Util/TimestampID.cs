@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace SBear.Framework.Util
@@ -15,8 +14,8 @@ namespace SBear.Framework.Util
         private long _lastTimestamp;
         private long _sequence; //计数从零开始
         private readonly DateTime? _initialDateTime;
-        private static TimestampId _timestampID;
-        private const int MAX_END_NUMBER = 9999;
+        private static TimestampId _timestampId;
+        private const int MaxEndNumber = 9999;
 
         private TimestampId(DateTime? initialDateTime)
         {
@@ -30,9 +29,9 @@ namespace SBear.Framework.Util
         /// <returns></returns>
         public static TimestampId GetInstance(DateTime? initialDateTime = null)
         {
-            if (_timestampID == null)
-                Interlocked.CompareExchange(ref _timestampID, new TimestampId(initialDateTime), null);
-            return _timestampID;
+            if (_timestampId == null)
+                Interlocked.CompareExchange(ref _timestampId, new TimestampId(initialDateTime), null);
+            return _timestampId;
         }
 
         /// <summary>
@@ -52,10 +51,9 @@ namespace SBear.Framework.Util
         /// 获取时间戳ID
         /// </summary>
         /// <returns></returns>
-        public string GetID()
+        public string GetId()
         {
-            long temp;
-            var timestamp = GetUniqueTimeStamp(_lastTimestamp, out temp);
+            var timestamp = GetUniqueTimeStamp(_lastTimestamp, out var temp);
             return $"{timestamp}{Fill(temp)}";
         }
 
@@ -63,7 +61,7 @@ namespace SBear.Framework.Util
         {
             var num = temp.ToString();
             IList<char> chars = new List<char>();
-            for (int i = 0; i < MAX_END_NUMBER.ToString().Length - num.Length; i++)
+            for (int i = 0; i < MaxEndNumber.ToString().Length - num.Length; i++)
             {
                 chars.Add('0');
             }
@@ -84,7 +82,7 @@ namespace SBear.Framework.Util
                 {
                     _sequence = _sequence + 1;
                     temp = _sequence;
-                    if (temp >= MAX_END_NUMBER)
+                    if (temp >= MaxEndNumber)
                     {
                         timeStamp = GetTimestamp();
                         _lastTimestamp = timeStamp;

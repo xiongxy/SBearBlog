@@ -5,8 +5,10 @@ namespace SBear.Entities
 {
     public partial class DataContext
     {
-        public DbSet<BlogUserEntity> BlogUserEntities { get; set; }
-        public DbSet<BlogArticleEntity> BlogArticleEntities { get; set; }
-        public DbSet<BlogArticleTypeEntity> BlogArticleTypeEntities { get; set; }
+        public DbSet<BlogUserEntity> BlogUser { get; set; }
+        public DbSet<BlogArticleEntity> BlogArticle { get; set; }
+        public DbSet<BlogArticleTypeEntity> BlogArticleType { get; set; }
+        public DbSet<BlogArticleReplyEntity> BlogArticleReply { get; set; }
+
     }
 }
