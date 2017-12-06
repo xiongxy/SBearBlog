@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SBear.Framework.Util;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.Filters;
-using SBear.Web.ViewModels.WirteArticleViewModels;
+using SBear.Web.ViewModels.ArticleViewModels;
 namespace SBear.Web.Controllers
 {
     [CheckLoginAuthorize]
@@ -21,7 +21,6 @@ namespace SBear.Web.Controllers
             _blogUserService = blogUserService;
             _blogArticleTypeService = blogArticleTypeService;
         }
-
         [HttpGet("WriteArticle/{id?}")]
         public IActionResult Index(long id)
         {

@@ -10,6 +10,6 @@ namespace SBear.Service.Blog.IBlogService
     {
         BlogArticleTypeDto Insert(BlogArticleTypeDto entity);
         List<BlogArticleTypeDto> GetAllList();
-        bool Delete(String typeName);
+        bool Delete(long id);
     }
 }

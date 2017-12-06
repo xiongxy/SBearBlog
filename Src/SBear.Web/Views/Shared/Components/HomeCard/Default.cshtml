@@ -5,7 +5,12 @@
         if (UserRuntimeContext.CheckUserLogin())
         {
             <div class="card">
-                @Html.ActionLink("写文章", "Index", "WriteArticle")
+                <a href="@Url.Action("Index","WriteArticle")">
+                    <img src="~/Image/edit.svg" style="width:16px;height:16px;" /> 写文章
+                </a>
+                <a href="@Url.Action("Index","ArticleType")">
+                    <img src="~/Image/Category.svg" style="width:16px;height:16px;" />管理分类
+                </a>
             </div>
         }
         break;

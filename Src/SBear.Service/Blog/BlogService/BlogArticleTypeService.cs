@@ -16,9 +16,9 @@ namespace SBear.Service.Blog.BlogService
             _repository = repository;
         }
 
-        public bool Delete(string typeName)
+        public bool Delete(long id)
         {
-            return _repository.Delete(x => x.TypeName == typeName);
+            return _repository.Delete(x => x.Id == id);
         }
 
         public List<BlogArticleTypeDto> GetAllList()

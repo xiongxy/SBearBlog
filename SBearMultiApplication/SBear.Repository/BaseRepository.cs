@@ -30,7 +30,8 @@ namespace SBear.Repository
             try
             {
                 var v = _dataContext.Set<TEntity>().FirstOrDefault(predicate);
-                //_dataContext.Remove(v);
+                _dataContext.Remove(v);
+                _dataContext.SaveChanges();
             }
             catch (Exception e)
             {

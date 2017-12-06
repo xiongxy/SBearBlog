@@ -47,6 +47,7 @@ namespace SBear.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStaticFiles();
             app.UseSession();
             if (env.IsDevelopment())
             {
@@ -57,10 +58,8 @@ namespace SBear.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseRequestMsgMiddleware();
             app.UseSBearHttpContextMiddleware();
-            app.UseStaticFiles();
             InitializeDataBase(app.ApplicationServices);
             app.UseMvc(routes =>
             {
@@ -72,11 +71,11 @@ namespace SBear.Web
 
         private void InitializeDataBase(IServiceProvider serviceProvider)
         {
-            //using (var serviceScope = serviceProvider.GetRequiredService<IServiceProvider>().CreateScope())
-            //{
-            //    var db = serviceScope.ServiceProvider.GetService<DataContext>();
-            //    db.Database.EnsureCreated();
-            //}
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceProvider>().CreateScope())
+            {
+                var db = serviceScope.ServiceProvider.GetService<DataContext>();
+                db.Database.EnsureCreated();
+            }
         }
     }
 }

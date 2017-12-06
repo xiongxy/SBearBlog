@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "文章分类";
+}
+@model SBear.Web.ViewModels.ArticleViewModels.ArticleTypeViewModel
+<div class="row" style="padding-top: 30px;">
+    <div class="col-md-8">
+        <form asp-controller="ArticleType" asp-action="Create" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="LoginPasswordInput" class="col-sm-2 control-label">文章类型</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="articleTypeName" placeholder="请输入文章类型">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">新建</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>类型名称</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BlogArticleTypes)
+                {
+                    <tr>
+                        <td>@item.TypeName</td>
+                        <td>@Html.ActionLink("删除", "Delete", new { id = item.Id })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

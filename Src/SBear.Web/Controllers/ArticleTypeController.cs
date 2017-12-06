@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.Filters;
-
+using SBear.Web.ViewModels.ArticleViewModels;
 namespace SBear.Web.Controllers
 {
     [CheckLoginAuthorize]
@@ -17,7 +17,12 @@ namespace SBear.Web.Controllers
         {
             _blogArticleType = blogArticleType;
         }
-        [Route("ArticleType/Create/{articleTypeName}")]
+        public IActionResult Index()
+        {
+            ArticleTypeViewModel articleTypeViewModel = new ArticleTypeViewModel();
+            articleTypeViewModel.BlogArticleTypes = _blogArticleType.GetAllList();
+            return View(articleTypeViewModel);
+        }
         public IActionResult Create(string articleTypeName)
         {
             var blogArticleTypeDto = new BlogArticleTypeDto()
@@ -25,13 +30,12 @@ namespace SBear.Web.Controllers
                 TypeName = articleTypeName
             };
             _blogArticleType.Insert(blogArticleTypeDto);
-            return Content("Create Success");
+            return RedirectToAction("Index"); ;
         }
-        [Route("ArticleType/Delete/{articleTypeName}")]
-        public IActionResult Delete(string articleTypeName)
+        public IActionResult Delete(long id)
         {
-            _blogArticleType.Delete(articleTypeName);
-            return Content("Delete Success");
+            _blogArticleType.Delete(id);
+            return RedirectToAction("Index"); ;
         }
     }
 }

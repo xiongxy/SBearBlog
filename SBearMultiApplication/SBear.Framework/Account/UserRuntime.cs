@@ -34,6 +34,5 @@ namespace SBear.Framework.Account
     {
         public String NickName { get; set; }
         public String UserName { get; set; }
-
     }
 }

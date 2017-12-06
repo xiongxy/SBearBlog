@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SBear.Web.ViewModels.WirteArticleViewModels
+namespace SBear.Web.ViewModels.ArticleViewModels
 {
     public class ArticleViewModel
     {
