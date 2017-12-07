@@ -11,7 +11,17 @@ namespace SBear.Framework
         {
             get
             {
+                if (ServiceProvider == null)
+                {
+                    Console.Write("ServiceProvider is Null");
+                    return null;
+                }
                 object factory = ServiceProvider.GetService(typeof(Microsoft.AspNetCore.Http.IHttpContextAccessor));
+                if (factory == null)
+                {
+                    Console.Write("factory is Null");
+                    return null;
+                }
                 Microsoft.AspNetCore.Http.HttpContext context = ((Microsoft.AspNetCore.Http.HttpContextAccessor)factory).HttpContext;
                 return context;
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SBear.Framework.Account;
 using SBear.Framework.Util;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.Filters;
@@ -54,9 +55,13 @@ namespace SBear.Web.Controllers
             {
                 case ArticleActionEnum.Add:
                     vm.BlogArticle.Id = Convert.ToInt64(TimestampId.GetInstance().GetId());
+                    vm.BlogArticle.CreateDate = DateTime.Now;
+                    vm.BlogArticle.CreateBy = UserRuntimeContext.CurrentUser.UserName;
                     _blogArticleService.Insert(vm.BlogArticle);
                     break;
                 case ArticleActionEnum.Edit:
+                    vm.BlogArticle.UpdateDate = DateTime.Now;
+                    vm.BlogArticle.UpdateBy = UserRuntimeContext.CurrentUser.UserName;
                     _blogArticleService.Update(vm.BlogArticle);
                     break;
             }

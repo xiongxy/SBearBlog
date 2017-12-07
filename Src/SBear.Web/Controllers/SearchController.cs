@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
 using SBear.Service.SBear.ISBearService;
+using SBear.Web.ViewModels;
 using SBear.Web.ViewModels.HomeViewModel;
 
 namespace SBear.Web.Controllers
@@ -23,20 +24,26 @@ namespace SBear.Web.Controllers
 
         public IActionResult Index(string key)
         {
+            var data = _blogArticleService.GetArticleListByKey(key, 10, 0).Select(x =>
+                new BlogArticleDto
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    CreateBy = x.CreateBy,
+                    HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6")
+                        .Replace("h4", "h6").Replace("h5", "h6"),
+                    Label = x.Label
+                }).ToList();
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                BlogArticles = _blogArticleService.GetArticleListByKey(key, 10, 0).Select(x =>
-                    new BlogArticleDto
-                    {
-                        Id = x.Id,
-                        Title = x.Title,
-                        CreateBy = x.CreateBy,
-                        HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6")
-                            .Replace("h4", "h6").Replace("h5", "h6"),
-                        Label = x.Label
-                    }).ToList(),
+                BlogArticles = data,
                 CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeSearch,
-                HomeSideBarViewModel = BuildHomeSideBarViewModel()
+                HomeSideBarViewModel = BuildHomeSideBarViewModel(),
+                CardViewModel = new CardViewModel()
+                {
+                    SearchCount = data.Count,
+                    CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeSearch
+                }
             };
             return View("../Home/Index", homeViewModel);
         }

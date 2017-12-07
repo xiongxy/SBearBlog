@@ -63,5 +63,10 @@ namespace SBear.Service.Blog.BlogService
         {
             return Mapper.Map<List<BlogArticleDto>>(_repository.GetAllList(predicate: x => true, include: x => x.BlogArticleType).ToList());
         }
+
+        public List<BlogArticleDto> GetArticleListByCatgory(long id, int pageSize, int pageNum)
+        {
+            return Mapper.Map<List<BlogArticleDto>>(_repository.LoadPageList(pageNum, pageSize, out int count, x => x.BlogArticleTypeId == id, x => x.CreateDate));
+        }
     }
 }

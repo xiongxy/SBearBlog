@@ -13,6 +13,7 @@ namespace SBear.Web.ViewComponents.Home
     {
         AtricleEdit = 1,
         HomeIndex = 2,
-        HomeSearch = 3
+        HomeSearch = 3,
+        HomeCatgory = 4
     }
 }

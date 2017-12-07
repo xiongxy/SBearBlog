@@ -18,7 +18,9 @@
 }
 
 .topicItem-contentItem {
-    height: 250px;
+    max-height: 250px;
     overflow: hidden;
 }
-.topicItem-action { }
+
+.topicItem-action {
+}

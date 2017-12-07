@@ -22,6 +22,7 @@ namespace SBear.Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).AddEnvironmentVariables("ASPNETCORE_").Build())
                 .UseStartup<Startup>()
                 .Build();
     }

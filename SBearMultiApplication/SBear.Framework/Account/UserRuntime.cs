@@ -10,6 +10,11 @@ namespace SBear.Framework.Account
         {
             get
             {
+                if (SBearHttpContext.Current == null)
+                {
+                    Console.WriteLine("SBearHttpContext.Current is Null!");
+                    return null;
+                }
                 if (SBearHttpContext.Current.Session.GetString("LoginMessage") == null)
                 {
                     return null;

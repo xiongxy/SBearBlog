@@ -10,6 +10,7 @@ using log4net.Config;
 using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,10 +34,11 @@ namespace SBear.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSession();
             //services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")));
             //services.AddDbContext<DataContext>(options=> options.UseMySql(@"Server=127.0.0.1;database=Blogmy;uid=root;pwd=root"));
             services.AddMvc();
-            services.AddSession();
             var containerBuilder = new Autofac.ContainerBuilder();
             containerBuilder.RegisterModule<AutofacModule>();
             containerBuilder.Populate(services);
@@ -47,8 +49,9 @@ namespace SBear.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStaticFiles();
             app.UseSession();
+            app.UseSBearHttpContextMiddleware();
+            app.UseStaticFiles();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,7 +62,6 @@ namespace SBear.Web
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseRequestMsgMiddleware();
-            app.UseSBearHttpContextMiddleware();
             InitializeDataBase(app.ApplicationServices);
             app.UseMvc(routes =>
             {

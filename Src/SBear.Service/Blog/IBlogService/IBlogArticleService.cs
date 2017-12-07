@@ -16,6 +16,7 @@ namespace SBear.Service.Blog.IBlogService
         List<BlogArticleDto> GetArticleListPageByViewOrderBy(int pageSize, int pageNum);
         BlogArticleDto Update(BlogArticleDto entity);
         List<BlogArticleDto> GetArticleListByKey(string key, int pageSize, int pageNum);
+        List<BlogArticleDto> GetArticleListByCatgory(long id, int pageSize, int pageNum);
         List<BlogArticleDto> GetAritcleTypeAndCount();
     }
 }

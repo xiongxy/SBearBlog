@@ -103,7 +103,7 @@ namespace SBear.Repository
 
         public IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order)
         {
-            var result = _dataContext.Set<TEntity>().Where(where).OrderBy(order).Take(pageSize).Skip(startPage * pageSize).ToList();
+            var result = _dataContext.Set<TEntity>().Where(where).OrderByDescending(order).Take(pageSize).Skip(startPage * pageSize).ToList();
             rowCount = result.Count();
             return result.AsQueryable();
         }

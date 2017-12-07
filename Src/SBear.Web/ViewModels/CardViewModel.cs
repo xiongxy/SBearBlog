@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SBear.Service.Blog.Dtos;
 
 namespace SBear.Web.ViewModels
 {
@@ -11,5 +12,6 @@ namespace SBear.Web.ViewModels
         public CardAciotnTypeEnum CardAciotnType { get; set; }
         public long ArticleIdentityId { get; set; }
         public int SearchCount { get; set; }
+        public BlogArticleTypeDto Catgory { get; set; }
     }
 }

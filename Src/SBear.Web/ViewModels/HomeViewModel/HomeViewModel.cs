@@ -12,5 +12,6 @@ namespace SBear.Web.ViewModels.HomeViewModel
         public List<BlogArticleDto> BlogArticles { get; set; }
         public CardAciotnTypeEnum CardAciotnType { get; set; }
         public HomeSideBarViewModel HomeSideBarViewModel { get; set; }
+        public CardViewModel CardViewModel { get; set; }
     }
 }

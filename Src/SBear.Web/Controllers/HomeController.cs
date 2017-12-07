@@ -33,29 +33,14 @@ namespace SBear.Web.Controllers
                         Label = x.Label
                     }).ToList(),
                 CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeIndex,
-                HomeSideBarViewModel = BuildHomeSideBarViewModel()
+                HomeSideBarViewModel = BuildHomeSideBarViewModel(),
+                CardViewModel = new ViewModels.CardViewModel()
+                {
+                    CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeIndex
+                }
             };
             return View(homeViewModel);
         }
-        public IActionResult Search(string key)
-        {
-            HomeViewModel homeViewModel = new HomeViewModel()
-            {
-                BlogArticles = _blogArticleService.GetArticleListByKey(key, 10, 1).Select(x =>
-                     new BlogArticleDto
-                     {
-                         Id = x.Id,
-                         Title = x.Title,
-                         CreateBy = x.CreateBy,
-                         HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6").Replace("h4", "h6").Replace("h5", "h6"),
-                         Label = x.Label
-                     }).ToList(),
-                CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeSearch,
-                HomeSideBarViewModel = BuildHomeSideBarViewModel()
-            };
-            return View("Index", homeViewModel);
-        }
-
         public HomeSideBarViewModel BuildHomeSideBarViewModel()
         {
             HomeSideBarViewModel homeSideBarViewModel = new HomeSideBarViewModel();

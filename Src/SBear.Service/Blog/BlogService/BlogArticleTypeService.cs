@@ -21,6 +21,11 @@ namespace SBear.Service.Blog.BlogService
             return _repository.Delete(x => x.Id == id);
         }
 
+        public BlogArticleTypeDto Get(long id)
+        {
+            return Mapper.Map<BlogArticleTypeDto>(_repository.Get(id));
+        }
+
         public List<BlogArticleTypeDto> GetAllList()
         {
             return Mapper.Map<List<BlogArticleTypeDto>>(_repository.GetAllList(x => true));

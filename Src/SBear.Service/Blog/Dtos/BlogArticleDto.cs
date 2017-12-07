@@ -14,7 +14,9 @@ namespace SBear.Service.Blog.Dtos
         public String Label { get; set; }
         public int Views { get; set; }
         public String CreateBy { get; set; }
-        public DateTime CreateDate => DateTime.Now;
+        public DateTime CreateDate { get; set; }
+        public String UpdateBy { get; set; }
+        public DateTime UpdateDate { get; set; }
         public long BlogArticleTypeId { get; set; }
         public BlogArticleTypeDto BlogArticleType { get; set; }
 

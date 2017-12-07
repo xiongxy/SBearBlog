@@ -4,23 +4,25 @@
         <h3 class="panel-title">分类</h3>
     </div>
     <div class="panel-body">
-        @foreach (var item in Model.ArticleType)
-        {
-            <p>
-                @item.BlogArticleType.TypeName  （@item.Count）
-            </p>
-        }
-</div>
+        <ul>
+            @foreach (var item in Model.ArticleType)
+            {
+                <li><a href="@Url.Action("Index", "Catgory", new { id = item.BlogArticleType.Id })">@item.BlogArticleType.TypeName (@item.Count)</a></li>
+            }
+        </ul>
+    </div>
 </div>
 <div class="panel panel-default" style="margin-top:20px;">
     <div class="panel-heading">
-        <h3 class="panel-title">点击排行</h3>
+        <h3 class="panel-title">阅读排行榜</h3>
     </div>
     <div class="panel-body">
-        @foreach (var item in Model.HotArticle)
-        {
-            <p>@item.Title</p>
-        }
+        <ul>
+            @for (int i = 0; i < Model.HotArticle.Count; i++)
+            {
+                <li><a href="@Url.Action("Index", "Article", new { id = Model.HotArticle[i].Id })">@( i + 1 ).@Model.HotArticle[i].Title (@Model.HotArticle[i].Views)</a> </li>
+            }
+        </ul>
     </div>
 </div>
 <div class="panel panel-default" style="margin-top:20px;">

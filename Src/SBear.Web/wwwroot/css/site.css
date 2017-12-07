@@ -11,6 +11,18 @@
     padding-top: 30px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+}
+
 .card {
     background-color: white;
     padding: 16px 20px;
@@ -18,3 +30,9 @@
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
     margin: 20px 0px;
 }
+    .card a {
+        margin-left: 30px;
+    }
+    .card .icon {
+        vertical-align: text-bottom;
+    }
