@@ -13,13 +13,15 @@ namespace SBear.Web.Controllers
     {
         private readonly IBlogUserService _blogUserService;
         private readonly IBlogArticleService _blogArticleService;
+        private readonly IBlogArticleTypeService _blogArticleTypeService;
         private readonly ISBearVisitorLogService _iSBearVisitorLogService;
 
-        public SearchController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService iSBearVisitorLogService)
+        public SearchController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService iSBearVisitorLogService, IBlogArticleTypeService blogArticleTypeService)
         {
             _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
             _iSBearVisitorLogService = iSBearVisitorLogService;
+            _blogArticleTypeService = blogArticleTypeService;
         }
 
         public IActionResult Index(string key)
@@ -53,9 +55,9 @@ namespace SBear.Web.Controllers
             homeSideBarViewModel.VisitorLogCount = _iSBearVisitorLogService.GetTotalVisitorCount();
             homeSideBarViewModel.HotArticle = _blogArticleService.GetArticleListPageByViewOrderBy(10, 0);
             var vv = _blogArticleService.GetAritcleTypeAndCount();
-            var homeSideBarViewModelArticleTypes = vv.GroupBy(x => x.BlogArticleType).Select(g => new HomeSideBarViewModelArticleType
+            var homeSideBarViewModelArticleTypes = vv.GroupBy(x => x.BlogArticleTypeId).Select(g => new HomeSideBarViewModelArticleType
             {
-                BlogArticleType = g.Key,
+                BlogArticleType = _blogArticleTypeService.Get(g.Key),
                 Count = g.Count()
             });
             homeSideBarViewModel.ArticleType = homeSideBarViewModelArticleTypes.ToList();

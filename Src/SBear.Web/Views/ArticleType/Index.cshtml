@@ -1,12 +1,15 @@
 ﻿@{
     ViewData["Title"] = "文章分类";
 }
+@section Css{
+    <link href="~/lib/bootstrapValidator/dist/css/bootstrapValidator.css" rel="stylesheet" />
+}
 @model SBear.Web.ViewModels.ArticleViewModels.ArticleTypeViewModel
 <div class="row" style="padding-top: 30px;">
     <div class="col-md-8">
-        <form asp-controller="ArticleType" asp-action="Create" method="post" class="form-horizontal">
+        <form id="addArticleTypeForm" asp-controller="ArticleType" asp-action="Create" method="post" class="form-horizontal">
             <div class="form-group">
-                <label for="LoginPasswordInput" class="col-sm-2 control-label">文章类型</label>
+                <label class="col-sm-2 control-label">文章类型</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" name="articleTypeName" placeholder="请输入文章类型">
                 </div>
@@ -36,3 +39,28 @@
         </table>
     </div>
 </div>
+@section Script{
+    <script src="~/lib/bootstrapValidator/dist/js/bootstrapValidator.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#addArticleTypeForm").bootstrapValidator({
+                message: 'This value is not valid',
+                excluded: [":disabled"],//关键配置，表示只对于禁用域不进行验证，其他的表单元素都要验证
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    "articleTypeName": {
+                        validators: {
+                            notEmpty: {
+                                message: '文章类型不能为空！'
+                            }
+                        }
+                    },
+                }
+            });
+        });
+    </script>
+}

@@ -31,10 +31,15 @@ namespace SBear.Service.Blog.BlogService
             return Mapper.Map<List<BlogArticleTypeDto>>(_repository.GetAllList(x => true));
         }
 
-        public BlogArticleTypeDto Insert(BlogArticleTypeDto entity)
+        public bool Insert(BlogArticleTypeDto entity)
         {
-            var v = Mapper.Map<BlogArticleTypeEntity>(entity);
-            return Mapper.Map<BlogArticleTypeDto>(_repository.Insert(v));
+            var v = _repository.FirstOrDefault(x => x.TypeName == entity.TypeName);
+            if (v == null)
+            {
+                _repository.Insert(Mapper.Map<BlogArticleTypeEntity>(entity));
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SBear.Service.Blog.IBlogService
 {
     public interface IBlogArticleTypeService
     {
-        BlogArticleTypeDto Insert(BlogArticleTypeDto entity);
+        bool Insert(BlogArticleTypeDto entity);
         List<BlogArticleTypeDto> GetAllList();
         bool Delete(long id);
         BlogArticleTypeDto Get(long id);

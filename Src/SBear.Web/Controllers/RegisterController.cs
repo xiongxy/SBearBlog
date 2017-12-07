@@ -27,11 +27,12 @@ namespace SBear.Web.Controllers
                 return View(vm);
             }
             var v = _blogUserService.Insert(vm.UserName, vm.Password);
-            if (v != null)
+            if (v)
             {
-                return RedirectToAction("Index","Login");
+                return RedirectToAction("Index", "Login");
             }
-            return View();
+            ModelState.AddModelError("UserName", "账号已经存在，请重新选择用户名进行注册！");
+            return View(vm);
         }
     }
 }

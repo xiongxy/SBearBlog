@@ -15,14 +15,14 @@ namespace SBear.Web.Controllers
     {
         private readonly IBlogUserService _blogUserService;
         private readonly IBlogArticleService _blogArticleService;
-        private readonly IBlogArticleTypeService _iBlogArticleTypeService;
-        private readonly ISBearVisitorLogService _iSBearVisitorLogService;
-        public CatgoryController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService iSBearVisitorLogService, IBlogArticleTypeService iBlogArticleTypeService)
+        private readonly IBlogArticleTypeService _blogArticleTypeService;
+        private readonly ISBearVisitorLogService _sBearVisitorLogService;
+        public CatgoryController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService sBearVisitorLogService, IBlogArticleTypeService blogArticleTypeService)
         {
             _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
-            _iSBearVisitorLogService = iSBearVisitorLogService;
-            _iBlogArticleTypeService = iBlogArticleTypeService;
+            _sBearVisitorLogService = sBearVisitorLogService;
+            _blogArticleTypeService = blogArticleTypeService;
         }
 
         public IActionResult Index(long id)
@@ -44,7 +44,7 @@ namespace SBear.Web.Controllers
                 CardViewModel = new CardViewModel()
                 {
                     CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeCatgory,
-                    Catgory = _iBlogArticleTypeService.Get(id)
+                    Catgory = _blogArticleTypeService.Get(id)
                 }
             };
             return View("../Home/Index", homeViewModel);
@@ -52,12 +52,12 @@ namespace SBear.Web.Controllers
         public HomeSideBarViewModel BuildHomeSideBarViewModel()
         {
             HomeSideBarViewModel homeSideBarViewModel = new HomeSideBarViewModel();
-            homeSideBarViewModel.VisitorLogCount = _iSBearVisitorLogService.GetTotalVisitorCount();
+            homeSideBarViewModel.VisitorLogCount = _sBearVisitorLogService.GetTotalVisitorCount();
             homeSideBarViewModel.HotArticle = _blogArticleService.GetArticleListPageByViewOrderBy(10, 0);
             var vv = _blogArticleService.GetAritcleTypeAndCount();
-            var homeSideBarViewModelArticleTypes = vv.GroupBy(x => x.BlogArticleType).Select(g => new HomeSideBarViewModelArticleType
+            var homeSideBarViewModelArticleTypes = vv.GroupBy(x => x.BlogArticleTypeId).Select(g => new HomeSideBarViewModelArticleType
             {
-                BlogArticleType = g.Key,
+                BlogArticleType = _blogArticleTypeService.Get(g.Key),
                 Count = g.Count()
             });
             homeSideBarViewModel.ArticleType = homeSideBarViewModelArticleTypes.ToList();

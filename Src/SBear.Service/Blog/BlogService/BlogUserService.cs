@@ -25,7 +25,7 @@ namespace SBear.Service.Blog.BlogService
             return Mapper.Map<BlogUserDto>(_repository.FirstOrDefault(x => x.UserName == userName));
         }
 
-        public BlogUserDto Insert(string userName, string password)
+        public bool Insert(string userName, string password)
         {
             var userEntity = new BlogUserEntity()
             {
@@ -33,7 +33,13 @@ namespace SBear.Service.Blog.BlogService
                 UserName = userName,
                 Password = password,
             };
-            return Mapper.Map<BlogUserDto>(_repository.Insert(userEntity));
+            var v = _repository.FirstOrDefault(x => x.UserName == userName);
+            if (v == null)
+            {
+                _repository.Insert(userEntity);
+                return true;
+            }
+            return false;
         }
     }
 }
