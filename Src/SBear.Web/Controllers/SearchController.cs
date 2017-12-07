@@ -23,7 +23,6 @@ namespace SBear.Web.Controllers
             _iSBearVisitorLogService = iSBearVisitorLogService;
             _blogArticleTypeService = blogArticleTypeService;
         }
-
         public IActionResult Index(string key)
         {
             var data = _blogArticleService.GetArticleListByKey(key, 10, 0).Select(x =>
@@ -31,10 +30,10 @@ namespace SBear.Web.Controllers
                 {
                     Id = x.Id,
                     Title = x.Title,
+                    HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6").Replace("h4", "h6").Replace("h5", "h6"),
+                    Label = x.Label,
                     CreateBy = x.CreateBy,
-                    HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6")
-                        .Replace("h4", "h6").Replace("h5", "h6"),
-                    Label = x.Label
+                    CreateDate = x.CreateDate,
                 }).ToList();
             HomeViewModel homeViewModel = new HomeViewModel()
             {
@@ -47,7 +46,7 @@ namespace SBear.Web.Controllers
                     CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeSearch
                 }
             };
-            return View("../Home/Index", homeViewModel);
+            return View("Index", homeViewModel);
         }
         public HomeSideBarViewModel BuildHomeSideBarViewModel()
         {

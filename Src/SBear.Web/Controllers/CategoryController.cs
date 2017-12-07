@@ -11,13 +11,13 @@ using SBear.Web.ViewModels.HomeViewModel;
 
 namespace SBear.Web.Controllers
 {
-    public class CatgoryController : Controller
+    public class CategoryController : Controller
     {
         private readonly IBlogUserService _blogUserService;
         private readonly IBlogArticleService _blogArticleService;
         private readonly IBlogArticleTypeService _blogArticleTypeService;
         private readonly ISBearVisitorLogService _sBearVisitorLogService;
-        public CatgoryController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService sBearVisitorLogService, IBlogArticleTypeService blogArticleTypeService)
+        public CategoryController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService sBearVisitorLogService, IBlogArticleTypeService blogArticleTypeService)
         {
             _blogArticleService = blogArticleService;
             _blogUserService = blogUserService;
@@ -34,10 +34,10 @@ namespace SBear.Web.Controllers
                     {
                         Id = x.Id,
                         Title = x.Title,
+                        HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6").Replace("h4", "h6").Replace("h5", "h6"),
+                        Label = x.Label,
                         CreateBy = x.CreateBy,
-                        HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6")
-                            .Replace("h4", "h6").Replace("h5", "h6"),
-                        Label = x.Label
+                        CreateDate = x.CreateDate,
                     }).ToList(),
                 CardAciotnType = ViewComponents.Home.CardAciotnTypeEnum.HomeCatgory,
                 HomeSideBarViewModel = BuildHomeSideBarViewModel(),
@@ -47,7 +47,7 @@ namespace SBear.Web.Controllers
                     Catgory = _blogArticleTypeService.Get(id)
                 }
             };
-            return View("../Home/Index", homeViewModel);
+            return View("Index", homeViewModel);
         }
         public HomeSideBarViewModel BuildHomeSideBarViewModel()
         {
