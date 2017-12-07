@@ -5,12 +5,25 @@
 }
 @section Css{
     <link href="~/lib/editor.md/css/editormd.preview.css" rel="stylesheet" />
+    <link href="~/css/articlelook.css" rel="stylesheet" />
 }
 <div class="row">
     <div class="col-md-12">
         @await Component.InvokeAsync("HomeCard", new CardViewModel { CardAciotnType = CardAciotnTypeEnum.AtricleEdit, ArticleIdentityId = article.Id })
-        <div id="test-editormd-view2">
-            <textarea id="append-test" style="display:none;">@article.MarkDownContent.ToString()</textarea>
+        <div>
+            @* <div class="article-header">
+                            <h1 class="article-title">@article.Title</h1>
+                            <div class="meta">
+                               <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a href="http://cuiqingcai.com/category/technique/python"> Python</a></span>
+                <span class="muted"><i class="fa fa-user"></i> <a href="http://cuiqingcai.com/author/aiyo">哎哟卧槽</a></span>
+                                <time class="muted"><i class="fa fa-clock-o"></i> @article.CreateDate</time>
+                                <span class="muted"><i class="fa fa-eye"></i> @article.Views</span>
+                               <span class="muted"><i class="fa fa-comments-o"></i> <a href="http://cuiqingcai.com/4886.html#respond">0评论</a></span>
+                            </div>
+                        </div>*@
+            <div id="editormdview">
+                <textarea id="append-test" style="display:none;">@article.MarkDownContent.ToString()</textarea>
+            </div>
         </div>
     </div>
 </div>
@@ -25,7 +38,7 @@
     <script src="~/lib/editor.md/editormd.js"></script>
     <script>
         $(function () {
-            var wordsView = editormd.markdownToHTML("test-editormd-view2",
+            var wordsView = editormd.markdownToHTML("editormdview",
                 {
                     htmlDecode: "style,script,iframe",  // you can filter tags decode
                     emoji: true,

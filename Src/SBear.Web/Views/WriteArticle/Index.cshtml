@@ -104,11 +104,11 @@
 }
 <div class="row">
     <div class="col-md-12">
-        <form id="formArticle" class="form-horizontal" method="post" asp-controller="WriteArticle">
+        <form id="formArticle" class="form-horizontal" method="post" action="../WriteArticle/Index">
             <div class="form-group">
                 <label for="inputTitle" class="col-sm-2 control-label">主题</label>
                 <div class="col-sm-5">
-                    <input id="article_title" type="text" class="form-control"  asp-for="@Model.BlogArticle.Title" id="inputTitle" placeholder="填写主题">
+                    <input id="article_title" type="text" class="form-control" asp-for="@Model.BlogArticle.Title" id="inputTitle" placeholder="填写主题">
                 </div>
             </div>
             <div class="form-group">
@@ -123,7 +123,7 @@
                     <div class="block form-control">
                         <div class="wordTags"></div>
                         <input class="wordInput" data-toggle="tooltip" data-placement="right" title="标签不可以为空" type="text" placeholder="请输入关键词以空格结尾">
-                        <input id="article_label" name="label" class="wordHiddenInput" asp-for="@Model.BlogArticle.Label" type="hidden">
+                        <input id="article_label" class="wordHiddenInput" asp-for="@Model.BlogArticle.Label" type="hidden">
                     </div>
                 </div>
             </div>
@@ -150,6 +150,12 @@
             </div>
             <textarea id="hideHTMLContent" asp-for="@Model.BlogArticle.HtmlContent" style="display:none;"></textarea>
             <textarea id="hideMarkDownContent" asp-for="@Model.BlogArticle.MarkDownContent" style="display:none;"></textarea>
+            <input type="hidden" asp-for="BlogArticle.Id" />
+            <input type="hidden" asp-for="BlogArticle.CreateBy" />
+            <input type="hidden" asp-for="BlogArticle.CreateDate" />
+            <input type="hidden" asp-for="BlogArticle.UpdateBy" />
+            <input type="hidden" asp-for="BlogArticle.UpdateDate" />
+            <input type="hidden" asp-for="BlogArticle.Views" />
             <input type="hidden" asp-for="ArticleAction" />
         </form>
     </div>
@@ -190,8 +196,7 @@
             $("#submitArticle").click(function() {
                 $("#hideHTMLContent").html(Editor.getHTML());
                 $("#hideMarkDownContent").html(Editor.getMarkdown());
-
-
+                alert("vad");
                 $("#formArticle").submit();
                 //alert(Editor.getHTML());
             });
