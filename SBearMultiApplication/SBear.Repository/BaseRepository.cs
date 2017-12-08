@@ -23,7 +23,17 @@ namespace SBear.Repository
 
         public bool Delete(TPrimaryKey id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var v = _dataContext.Set<TEntity>().Find(id);
+                _dataContext.Remove(v);
+                _dataContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
         public bool Delete(Expression<Func<TEntity, bool>> predicate)
         {

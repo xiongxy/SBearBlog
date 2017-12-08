@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Src\SBear.Service\SBear.Service.csproj" />
-    <ProjectReference Include="..\SBear.Repository\SBear.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

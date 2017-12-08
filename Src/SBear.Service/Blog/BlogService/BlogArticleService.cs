@@ -68,5 +68,10 @@ namespace SBear.Service.Blog.BlogService
         {
             return Mapper.Map<List<BlogArticleDto>>(_repository.LoadPageList(pageNum, pageSize, out int count, x => x.BlogArticleTypeId == id, x => x.CreateDate));
         }
+
+        public bool Delete(long id)
+        {
+           return _repository.Delete(id);
+        }
     }
 }

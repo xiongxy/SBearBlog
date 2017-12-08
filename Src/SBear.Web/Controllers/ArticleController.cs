@@ -16,12 +16,19 @@ namespace SBear.Web.Controllers
             _blogArticleService = blogArticleService;
         }
         [Route("Article/{id}")]
+        [HttpGet]
         public IActionResult Index(long id)
         {
             var vv = _blogArticleService.GetArticle(id);
             _blogArticleService.AddArticleView(id);
             ViewBag.Article = vv;
             return View();
+        }
+        [HttpDelete]
+        public IActionResult Delete(long id)
+        {
+            _blogArticleService.Delete(id);
+            return Content("Success");
         }
     }
 }

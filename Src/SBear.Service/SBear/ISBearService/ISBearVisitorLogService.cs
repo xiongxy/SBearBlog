@@ -7,7 +7,7 @@ namespace SBear.Service.SBear.ISBearService
 {
     public interface ISBearVisitorLogService
     {
-        SBearVisitorLogDto Insert(string IP);
+        bool Insert(string IP);
         int GetTotalVisitorCount();
         IList<SBearVisitorLogDto> GetVisitorLogs();
     }

@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SBear Blog</title>
-    <link href="~/lib/jquery/dist/jquery.js" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     @RenderSection("Css", required: false)
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -38,8 +39,6 @@
             <p><a href="https://github.com/xiongxy/SBearBlog" target="_blank">SBear</a>&copy; 2017 - SBear</p>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     @RenderSection("Script", required: false)
 </body>
 </html>

@@ -1,70 +1,71 @@
-﻿
-SBear.Modal.dialog({
-    title: "操作提示",
-    content: "<h3>确认要将今日12.12所有未取票订单做出票处理？（PS：此操作无法恢复）</h3>",
-    ok: function () {
-        SBear.Modal.dialog.close();
-        window.external.NoTakingHandle(3);
-    }
-});
-function ModalCall(result) {
-    SBear.Modal.dialog({
-        title: "",
-        content: result,
-        type: "qita",
-        timeout: "2000",
-        ok: function () {
-            SBear.Modal.dialog.close();
-        }
-    });
-};
-SBear = {};
-//基于Bootstrap制作的modal
+﻿SBear = {};
 SBear.Modal = {};
+SBear.Modal.Enable = function (settings) {
+    settings = SBear.Modal.Init(settings);
+    SBear.Modal.AddContent(settings);
+    SBear.Modal.AddEvent(settings);
+    if (typeof parseInt(settings.timeout) === "number" && !isNaN(parseInt(settings.timeout))) {
+        setTimeout("SBear.Modal.Close();", settings.timeout);
+    }
+    $("#" + settings.id + "").modal({
+        backdrop: settings.backdrop
+    });
+    $("#" + settings.id + "").on('hidden.bs.modal',
+        function () {
+            SBear.Modal.Close();
+        });
+}
 SBear.Modal.Init = function (settings) {
     var defaultSettings = {
+        id: "myModal",
         title: "提示",
-        content: ""
+        content: "",
+        btns: [{ id: "btn_save", text: "保存", function: function () { } }, { id: "closebtn" }],//按钮组
+        timeout: "",
+        backdrop: "static",
+        size: "sm",//lg sm
+        showclosebtn: true//显示关闭按钮
     }
     SBear.Modal.Settings = $.extend({}, defaultSettings, settings || {});
     return SBear.Modal.Settings;
 }
-SBear.Modal.Settings = {
-
-}
-SBear.Modal.dialog = function (settings) {
-    settings = SBear.Modal.Init(settings);
-    SBear.Modal.initContent();
-    debugger;
-    //关闭的时候调用方法
-    if (SBear.Modal.settings.ok) {
-        $("#modal-overlay #modal-overlay-ok").click(settings.ok);
+SBear.Modal.AddContent = function (settings) {
+    var modalSize = "";
+    var modaldialogSize = "";
+    if (settings.size === "lg") { modalSize = "bs-example-modal-lg"; modaldialogSize = "modal-lg"; }
+    else if (settings.size === "sm") { modalSize = "bs-example-modal-sm"; modaldialogSize = "modal-sm"; }
+    var modal = $('<div class="modal fade ' + modalSize + '" id="' + settings.id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>');
+    var modaldialog = $('<div class="modal-dialog ' + modaldialogSize + '" style="top:30%;transform:translateY(-50%);" role="document"></div>');
+    var modalcontent = $('<div class="modal-content"></div>');
+    var modalheader = $('<div class="modal-header"></div>');
+    var modalbody = $('<div class="modal-body"></div>');
+    var modalfooter = $('<div class="modal-footer"></div>');
+    if (settings.showclosebtn) {
+        $(modalheader).append('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>');
     }
-    if (SBear.Modal.settings.cancel) {
-        $("#modal-overlay #modal-overlay-cancel").click(settings.cancel);
-    }
-    if (typeof parseInt(SBear.Modal.settings.timeout) === "number" && !isNaN(parseInt(SBear.Modal.settings.timeout))) {
-        setTimeout("SBear.Modal.dialog.close();", SBear.Modal.settings.timeout);
-    }
+    $(modalheader).append(settings.title);
+    $(modalbody).append(settings.content);
+    settings.btns.forEach(function (btn) {
+        var btnclass = btn.class || "btn-primary";
+        var btntemp;
+        if (btn.id !== "closebtn") {
+            btntemp = $('<button class="btn" type="button" id="' + btn.id + '">' + btn.text + '</button>');
+            $(btntemp).addClass(btnclass);
+        } else {
+            btntemp = $('<button class="btn btn-default" type="button" data-dismiss="modal" aria-hidden="true" id="' + btn.id + '">关闭</button>');
+        }
+        $(modalfooter).append(btntemp);
+    });
+    modalcontent.append(modalheader).append(modalbody).append(modalfooter);
+    modaldialog.append(modalcontent);
+    modal.append(modaldialog);
+    $("body").append(modal);
 }
-SBear.Modal.initContent = function () {
-    var modalHtml =
-        "<div id=\"modal-overlay\" class=\"modal fade bs-example-modal-sm\" tabindex=\"-1\" role=\"dialog\">" +
-        "<div class=\"modal-dialog modal-sm\" role=\"document\">" +
-        "<div class=\"modal-content\">" +
-        "<div class=\"modal-header\"></div>" +
-        "<div class=\"modal-body\"></div>" +
-        "<div class=\"modal-footer\"></div>" +
-        "</div>" +
-        "</div>" +
-        "</div>";
-    var $modalHtml = $(modalHtml);
-    $(".modal-header", $modalHtml).text(SBear.Modal.Settings.okVal);
-    $(".modal-body", $modalHtml).text(SBear.Modal.Settings.okVal);
-    $(".modal-footer", $modalHtml).text(SBear.Modal.Settings.okVal);
-    $("body").append($modalHtml);
+SBear.Modal.AddEvent = function (settings) {
+    settings.btns.forEach(function (btn) {
+        $("#" + btn.id + "").on("click", btn.function);
+    });
 }
-SBear.Modal.dialog.close = function () {
-    var e1 = document.getElementById("modal-overlay");
-    document.body.removeChild(e1);
+SBear.Modal.Close = function () {
+    $("#" + SBear.Modal.Settings.id + "").remove();
 }

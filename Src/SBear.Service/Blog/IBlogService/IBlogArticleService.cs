@@ -18,5 +18,6 @@ namespace SBear.Service.Blog.IBlogService
         List<BlogArticleDto> GetArticleListByKey(string key, int pageSize, int pageNum);
         List<BlogArticleDto> GetArticleListByCatgory(long id, int pageSize, int pageNum);
         List<BlogArticleDto> GetAritcleTypeAndCount();
+        bool Delete(long id);
     }
 }

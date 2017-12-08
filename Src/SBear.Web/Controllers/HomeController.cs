@@ -34,7 +34,7 @@ namespace SBear.Web.Controllers
                     {
                         Id = x.Id,
                         Title = x.Title,
-                        HtmlContent = x.HtmlContent.Replace("h1", "h6").Replace("h2", "h6").Replace("h3", "h6").Replace("h4", "h6").Replace("h5", "h6"),
+                        TextConetent = x.TextConetent.Substring(0, 150),
                         Label = x.Label,
                         CreateBy = x.CreateBy,
                         CreateDate = x.CreateDate,
