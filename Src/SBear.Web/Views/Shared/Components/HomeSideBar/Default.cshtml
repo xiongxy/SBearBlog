@@ -7,7 +7,7 @@
         <ul>
             @foreach (var item in Model.ArticleType)
             {
-                <li><a href="@Url.Action("Index", "Catgory", new { id = item.BlogArticleType.Id })">@item.BlogArticleType.TypeName (@item.Count)</a></li>
+                <li><a href="@Url.Action("Index", "Category", new { id = item.BlogArticleType.Id })">@item.BlogArticleType.TypeName (@item.Count)</a></li>
             }
         </ul>
     </div>
