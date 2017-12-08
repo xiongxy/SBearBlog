@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SBear.Entities;
 using SBear.Framework.Autofac;
+using SBear.Framework.Config;
 using SBear.Framework.Middleware;
 namespace SBear.Web
 {
@@ -36,6 +37,8 @@ namespace SBear.Web
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession();
+            services.AddOptions();
+            services.Configure<BlogAppSettingConfig>(Configuration.GetSection("BlogAppSetting"));
             //services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")));
             //services.AddDbContext<DataContext>(options=> options.UseMySql(@"Server=127.0.0.1;database=Blogmy;uid=root;pwd=root"));
             services.AddMvc();
