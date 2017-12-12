@@ -28,6 +28,9 @@ namespace SBear.Web.Controllers
         public IActionResult Delete(long id)
         {
             _blogArticleService.Delete(id);
+
+
+
             return Content("Success");
         }
     }

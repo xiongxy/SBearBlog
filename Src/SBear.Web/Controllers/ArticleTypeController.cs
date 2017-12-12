@@ -7,15 +7,20 @@ using SBear.Service.Blog.Dtos;
 using SBear.Service.Blog.IBlogService;
 using SBear.Web.Filters;
 using SBear.Web.ViewModels.ArticleViewModels;
+using Microsoft.Extensions.Caching.Memory;
+
 namespace SBear.Web.Controllers
 {
     [CheckLoginAuthorize]
     public class ArticleTypeController : Controller
     {
         private readonly IBlogArticleTypeService _blogArticleType;
-        public ArticleTypeController(IBlogArticleTypeService blogArticleType)
+        private readonly IMemoryCache _cache;
+
+        public ArticleTypeController(IBlogArticleTypeService blogArticleType, IMemoryCache memoryCache)
         {
             _blogArticleType = blogArticleType;
+            _cache = memoryCache;
         }
         public IActionResult Index()
         {
@@ -35,6 +40,7 @@ namespace SBear.Web.Controllers
         public IActionResult Delete(long id)
         {
             _blogArticleType.Delete(id);
+            _cache.Remove("cache_HomeSideBar");
             return RedirectToAction("Index"); ;
         }
     }

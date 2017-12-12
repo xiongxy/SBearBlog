@@ -16,13 +16,12 @@
                         <h4><a asp-controller="Article" asp-action="@item.Id">@item.Title</a></h4>
                     </div>
                     <div class="topicItem-authorInfo">
-                        <h4>@item.CreateBy</h4>
                     </div>
                     <div class="topicItem-contentItem">
                         @Html.Raw(item.TextConetent)
                     </div>
                     <div class="topicItem-action">
-                        <h6>@item.CreateDate 发表</h6>
+                        <h6>于 @item.CreateDate 发表</h6>
                     </div>
                 </div>
             }

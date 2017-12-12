@@ -39,7 +39,7 @@ namespace SBear.Web.Controllers
                     {
                         Id = x.Id,
                         Title = x.Title,
-                        TextConetent = x.TextConetent.Substring(0, 150),
+                        TextConetent = x.TextConetent.Length > 150 ? x.TextConetent.Substring(0, 150): x.TextConetent,
                         Label = x.Label,
                         CreateBy = x.CreateBy,
                         CreateDate = x.CreateDate,
@@ -61,7 +61,7 @@ namespace SBear.Web.Controllers
                 {
                     Id = x.Id,
                     Title = x.Title,
-                    TextConetent = x.TextConetent.Substring(0, 150),
+                    TextConetent = x.TextConetent.Length > 150 ? x.TextConetent.Substring(0, 150) : x.TextConetent,
                     Label = x.Label,
                     CreateBy = x.CreateBy,
                     CreateDate = x.CreateDate,
@@ -89,7 +89,7 @@ namespace SBear.Web.Controllers
                     {
                         Id = x.Id,
                         Title = x.Title,
-                        TextConetent = x.TextConetent.Substring(0, 150),
+                        TextConetent = x.TextConetent.Length > 150 ? x.TextConetent.Substring(0, 150) : x.TextConetent,
                         Label = x.Label,
                         CreateBy = x.CreateBy,
                         CreateDate = x.CreateDate,

@@ -35,7 +35,7 @@ SBear.Modal.AddContent = function (settings) {
     if (settings.size === "lg") { modalSize = "bs-example-modal-lg"; modaldialogSize = "modal-lg"; }
     else if (settings.size === "sm") { modalSize = "bs-example-modal-sm"; modaldialogSize = "modal-sm"; }
     var modal = $('<div class="modal fade ' + modalSize + '" id="' + settings.id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>');
-    var modaldialog = $('<div class="modal-dialog ' + modaldialogSize + '" style="top:30%;transform:translateY(-50%);" role="document"></div>');
+    var modaldialog = $('<div class="modal-dialog ' + modaldialogSize + '" style="top:45%;transform:translateY(-50%);" role="document"></div>');
     var modalcontent = $('<div class="modal-content"></div>');
     var modalheader = $('<div class="modal-header"></div>');
     var modalbody = $('<div class="modal-body"></div>');
