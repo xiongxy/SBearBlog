@@ -35,7 +35,7 @@ namespace SBear.Service.SBear.SBearService
                 Ip = ip,
                 CreateDate = DateTime.Now
             };
-            var record = _repository.FirstOrDefault(x => x.Ip == ip);
+            var record = _repository.GetListRecord(x => x.Ip == ip);
             if (record == null || GetTimeDifference(record.CreateDate.Value, DateTime.Now) > 2)
             {
                 _repository.Insert(sBearVisitorLog);

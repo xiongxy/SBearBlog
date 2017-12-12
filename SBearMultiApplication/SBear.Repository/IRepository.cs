@@ -20,6 +20,8 @@ namespace SBear.Repository
         bool Delete(TPrimaryKey id);
         int GetTotalCount(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order);
+        IEnumerable<TEntity> AsEnumerable();
+
     }
     public interface IRepository<TEntity> : IRepository<TEntity, long> where TEntity : BaseEntity
     {

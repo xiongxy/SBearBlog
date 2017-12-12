@@ -3,10 +3,12 @@
 }
 
 .article-title {
+    text-align: center;
+    padding: 10px;
 }
 
-.meta {
-}
-
-.muted {
+.article-meta {
+    text-align: center;
+    padding: 10px;
+    color: #999;
 }

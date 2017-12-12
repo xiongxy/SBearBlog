@@ -54,12 +54,14 @@
                 btns: [{
                     id: "card_articleDelete_Ok", text: "删除", function: function () {
                         var v = $("#card_articleDelete").attr("articleId");
-                        alert(v);
-                        $.ajax({ url: "/Article/Delete", type: "delete", data: { id: v }, async: false });
+                        $.ajax({
+                            url: "/Article/Delete", type: "delete", data: { id: v }, async: false, complete: function () {
+                                location.href = "../";
+                            }
+                        });
                     }
                 }, { id: "closebtn" }]
             });
-            location.href = "../";
         });
     })
 </script>

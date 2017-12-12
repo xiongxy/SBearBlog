@@ -25,7 +25,9 @@ namespace SBear.Service.Blog.BlogService
         }
         public BlogArticleDto GetArticle(long id)
         {
-            return Mapper.Map<BlogArticleDto>(_repository.Get(id));
+
+            var v = _repository.AsEnumerable();
+            return Mapper.Map<BlogArticleDto>(_repository.AsEnumerable().AsQueryable().Include(x => x.BlogArticleType).FirstOrDefault(x => x.Id == id));
         }
         public List<BlogArticleDto> GetArticleListPage(int pageSize, int pageNum)
         {
@@ -71,7 +73,7 @@ namespace SBear.Service.Blog.BlogService
 
         public bool Delete(long id)
         {
-           return _repository.Delete(id);
+            return _repository.Delete(id);
         }
     }
 }

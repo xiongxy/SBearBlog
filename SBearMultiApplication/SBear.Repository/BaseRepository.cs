@@ -49,17 +49,14 @@ namespace SBear.Repository
             }
             return true;
         }
-
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return _dataContext.Set<TEntity>().FirstOrDefault(predicate);
         }
-
         public TEntity Get(TPrimaryKey id)
         {
             return _dataContext.Set<TEntity>().FirstOrDefault(CreateEqualityExpressionForId(id));
         }
-
         public IEnumerable<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
         {
             return _dataContext.Set<TEntity>().Where(predicate).ToList();
@@ -72,19 +69,16 @@ namespace SBear.Repository
         {
             throw new NotImplementedException();
         }
-
         public TEntity Insert(TEntity entity)
         {
             _dataContext.Set<TEntity>().Add(entity);
             _dataContext.SaveChanges();
             return entity;
         }
-
         public TEntity InsertOrUpdate(TEntity entity)
         {
             throw new NotImplementedException();
         }
-
         public TEntity Update(TEntity entity)
         {
             _dataContext.Set<TEntity>().Update(entity);
@@ -105,26 +99,25 @@ namespace SBear.Repository
             );
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
-
         public int GetTotalCount(Expression<Func<TEntity, bool>> predicate)
         {
             return _dataContext.Set<TEntity>().Count(predicate);
         }
-
         public IQueryable<TEntity> LoadPageList(int startPage, int pageSize, out int rowCount, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order)
         {
             var result = _dataContext.Set<TEntity>().Where(where).OrderByDescending(order).Take(pageSize).Skip(startPage * pageSize).ToList();
             rowCount = result.Count();
             return result.AsQueryable();
         }
+        public IEnumerable<TEntity> AsEnumerable()
+        {
+            return _dataContext.Set<TEntity>().AsEnumerable();
+        }
     }
-
     public class BaseRepository<TEntity> : BaseRepository<TEntity, long> where TEntity : BaseEntity
     {
         public BaseRepository(DataContext dataContext) : base(dataContext)
         {
         }
     }
-
-
 }
