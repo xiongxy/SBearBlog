@@ -202,6 +202,15 @@
                     htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
                     toolbarIcons: function() {
                         return editormd.toolbarModes["simple"];
+                    },
+                    onfullscreen: function () {
+                        $("body>nav").css("z-index", "-1");
+                        $("#editormd").css("z-index", "99");
+                    },
+                    onfullscreenExit : function() {
+                        $("body>nav").css("z-index", "");
+                        $("#editormd").css("z-index", "");
+                        // console.log("onfullscreenExit =>", this, this.id, this.settings);
                     }
                 });
             $("#submitArticle").click(function() {

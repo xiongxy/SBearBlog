@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
@@ -39,7 +40,7 @@ namespace SBear.Web.Controllers
                     {
                         Id = x.Id,
                         Title = x.Title,
-                        TextConetent = x.TextConetent.Length > 150 ? x.TextConetent.Substring(0, 150): x.TextConetent,
+                        TextConetent = x.TextConetent.Length > 150 ? x.TextConetent.Substring(0, 150) : x.TextConetent,
                         Label = x.Label,
                         CreateBy = x.CreateBy,
                         CreateDate = x.CreateDate,
@@ -118,7 +119,7 @@ namespace SBear.Web.Controllers
                     Count = g.Count()
                 });
                 homeSideBarViewModel.ArticleType = homeSideBarViewModelArticleTypes.ToList();
-                _cache.Set("cache_HomeSideBar", homeSideBarViewModel);
+                _cache.Set("cache_HomeSideBar", homeSideBarViewModel, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(5)).SetAbsoluteExpiration(TimeSpan.FromMinutes(20)));
                 homeSideBar = homeSideBarViewModel;
             }
             return homeSideBar;
