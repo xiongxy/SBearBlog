@@ -22,7 +22,6 @@ namespace SBear.Web.Controllers
         private readonly IBlogArticleTypeService _blogArticleTypeService;
         private readonly ISBearVisitorLogService _iSBearVisitorLogService;
         private readonly IMemoryCache _cache;
-
         public HomeController(IBlogUserService blogUserService, IBlogArticleService blogArticleService, ISBearVisitorLogService iSBearVisitorLogService, IBlogArticleTypeService blogArticleTypeService, IMemoryCache memoryCache)
         {
             _blogArticleService = blogArticleService;
@@ -103,6 +102,7 @@ namespace SBear.Web.Controllers
                     Catgory = _blogArticleTypeService.Get(id)
                 }
             };
+            ViewData["Title"] = _blogArticleTypeService.Get(id).TypeName;
             return View("Index", homeViewModel);
         }
         public HomeSideBarViewModel BuildHomeSideBarViewModel()

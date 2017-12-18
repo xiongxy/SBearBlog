@@ -5,8 +5,8 @@ using Microsoft.Extensions.Options;
 
 namespace SBear.Framework.Config
 {
-    class SBearConfig
+    public static class SBearConfig
     {
-        public BlogAppSettingConfig BlogAppSettingConfig => SBearHttpContext.Current.RequestServices.GetService(typeof(IOptions<BlogAppSettingConfig>)) as BlogAppSettingConfig;
+        public static BlogAppSettingConfig BlogAppSettingConfig => (SBearHttpContext.Current.RequestServices.GetService(typeof(IOptions<BlogAppSettingConfig>)) as IOptions<BlogAppSettingConfig>)?.Value;
     }
 }

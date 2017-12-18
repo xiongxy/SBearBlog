@@ -1,7 +1,7 @@
 ﻿@using SBear.Web.ViewComponents.Home;
 @{
-    ViewData["Title"] = "Home Page";
     var article = ViewBag.Article;
+    ViewData["Title"] = article.Title;
 }
 @section Css{
     <link href="~/lib/editor.md/css/editormd.preview.css" rel="stylesheet" />
