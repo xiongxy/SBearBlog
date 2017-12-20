@@ -37,7 +37,10 @@ namespace SBear.Web
         {
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
             services.AddOptions();
             services.Configure<BlogAppSettingConfig>(Configuration.GetSection("BlogAppSetting"));
             //services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionSqlite")));

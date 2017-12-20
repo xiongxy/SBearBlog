@@ -7,6 +7,6 @@ namespace SBear.Framework.Config
 {
     public static class SBearConfig
     {
-        public static BlogAppSettingConfig BlogAppSettingConfig => (SBearHttpContext.Current.RequestServices.GetService(typeof(IOptions<BlogAppSettingConfig>)) as IOptions<BlogAppSettingConfig>)?.Value;
+        public static BlogAppSettingConfig BlogAppSettingConfig => (SBearHttpContext.Current.RequestServices.GetService(typeof(IOptionsSnapshot<BlogAppSettingConfig>)) as IOptionsSnapshot<BlogAppSettingConfig>)?.Value;
     }
 }
